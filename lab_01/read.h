@@ -12,9 +12,9 @@
 
 int read_double(double_t *num);
 int read_mantissa(double_t *number);
-int read_order(int *const order);
-int read_int_str(char *const read_str, const int max_int_len);
-void normalize_number(double_t *const number);
-int read_int(int_t *const number);
+int read_order(int *order);
+int read_int_str(char *read_str, int max_int_len);
+void normalize_number(double_t *number);
+int read_int(int_t *number);
 
 #endif // __READ_H__

@@ -103,7 +103,7 @@ int read_mantissa(double_t *number)
     return EXIT_SUCCESS;
 }
 
-int read_int_str(char *const read_str, const int max_int_len)
+int read_int_str(char *read_str, int max_int_len)
 {
     char ch;
     short int count = 0;
@@ -144,7 +144,7 @@ int read_int_str(char *const read_str, const int max_int_len)
     return count;
 }
 
-int read_order(int *const order)
+int read_order(int *order)
 {
     char read_order[MAX_ORDER_LEN + 1];
 
@@ -161,7 +161,7 @@ int read_order(int *const order)
     return EXIT_SUCCESS;
 }
 
-void normalize_number(double_t *const number)
+void normalize_number(double_t *number)
 {
     short int back_zeros = 0;
 
@@ -202,7 +202,7 @@ void normalize_number(double_t *const number)
     }
 }
 
-int read_int(int_t *const number)
+int read_int(int_t *number)
 {
     print_msg_start();
     print_msg_read_int();
