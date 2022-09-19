@@ -103,52 +103,55 @@ int read_mantissa(double_t *number)
     return EXIT_SUCCESS;
 }
 
-int read_int_str(char *read_str, int max_int_len)
+int read_int_str(char *read_str, short int *count, int max_int_len)
 {
     char ch;
-    short int count = 0;
+    *count = 0;
     _Bool zeros_flag = true;
 
-    while ((ch = getchar()) != '\n' && ch != EOF && count < max_int_len + 1)
+    while ((ch = getchar()) != '\n' && ch != EOF && *count < max_int_len + 1)
     {
         if (ch == ' ')
             continue;
 
-        if ('0' == ch && count > 1 && zeros_flag)
+        if ('0' == ch && *count > 1 && zeros_flag)
             continue;
 
         if (ch < '0' || ch > '9')
         {
-            if (count != 0 || (0 == count && ch != '-' && ch != '+'))
+            if (*count != 0 || (0 == *count && ch != '-' && ch != '+'))
                 return ERR_READ_INT_STR;
         }
 
-        if (0 == count && ch != '-' && ch != '+')
-            read_str[count++] = '+';
+        if (0 == *count && ch != '-' && ch != '+')
+            read_str[(*count)++] = '+';
 
         if (ch != '0' && zeros_flag)
         {
             zeros_flag = false;
 
-            if (count > 1)
-                count--;
+            if (*count > 1)
+                (*count)--;
         }
-        read_str[count++] = ch;
+        read_str[(*count)++] = ch;
     }
 
-    if (count > max_int_len)
-        return ERR_READ_INT_STR;
+    if (*count > max_int_len)
+        return ERR_WRONG_LEN;
 
-    read_str[count] = '\0';
+    read_str[*count] = '\0';
 
-    return count;
+    return EXIT_SUCCESS;
 }
 
 int read_order(int *order)
 {
-    char read_order[MAX_ORDER_LEN + 1];
+    int err = EXIT_SUCCESS;
 
-    if (read_int_str(read_order, MAX_ORDER_LEN) < 0)
+    char read_order[MAX_ORDER_LEN + 1];
+    short int len_order = 0;
+    err = read_int_str(read_order, &len_order, MAX_ORDER_LEN);
+    if (err != EXIT_SUCCESS)
         return ERR_READ_ORDER;
 
     char *end_ptr;
@@ -204,15 +207,11 @@ void normalize_number(double_t *number)
 
 int read_int(int_t *number)
 {
+    int err = EXIT_SUCCESS;
     print_msg_start();
     print_msg_read_int();
 
-    short int len = read_int_str(number->num, MAX_INT_LEN + 1);
+    err = read_int_str(number->num, &(number->len_num), MAX_INT_LEN + 1);
 
-    if (len < 0)
-        return len;
-
-    number->len_num = len;
-
-    return EXIT_SUCCESS;
+    return err;
 }

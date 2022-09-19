@@ -2,20 +2,15 @@
 
 void print_msg_start()
 {
-    puts("ПОИСК ПРОИЗВЕДЕНИЯ ДЛИННОГО ЦЕЛОГО");
-    puts("ЧИСЛА НА ДЛИННОЕ ВЕЩЕСТВЕННОЕ ЧИСЛО.");
-    puts("");
-    puts("Пробелы, лидирующие и конечные нули при вводе игнорируются.");
-    puts("");
-    puts("Пустой ввод корректен и является вводом нуля");
-    puts("");
-    puts("Формат ввода целого числа: ±n, длина(n) ≤ 30, знак + необязателен.");
-    puts("");
-    puts("Формат ввода вещественного числа: ±n.m E ±K, длина(n+m) ≤ 30,");
-    puts("длина(k) ≤ 5, знак + необязателен.");
-    puts("");
-    puts("                                 1   5    10   15   20   25   30");
-    puts("                                ±|---|----|----|----|----|----|");
+    printf("%s",
+           "Шимшир Эмирджан, ИУ7-33Б, В-24\n\n"
+           "Поиск произведение длинного целого\n"
+           "числа на длинное вещественное число.\n\n"
+           "Пробелы, лидирующие и конечные нули при вводе игнорируются.\n"
+           "Пустой ввод корректен и является вводом нуля\n"
+           "Формат ввода целого числа: ±n, длина(n) ≤ 30, знак + необязателен.\n"
+           "Формат ввода вещественного числа: ±n.m E ±K, длина(n+m) ≤ 30, длина(k) ≤ 5, знак + необязателен.\n"
+           );
 }
 
 void print_msg_read_int()
@@ -33,17 +28,17 @@ void print_msg_print_double()
     printf("%s", "Результат умножения двух чисел: ");
 }
 
-void print_double(double_t *number)
+void print_double(double_t number)
 {
     print_msg_print_double();
 
-    printf("%c0.", number->sign);
-    for (int i = number->point_place; i < number->len_num; i++)
+    printf("%c0.", number.sign);
+    for (int i = number.point_place; i < number.len_num; i++)
     {
-        printf("%c", number->num[i]);
+        printf("%c", number.num[i]);
     }
 
-    printf(" E %+d\n", number->order);
+    printf(" E %+d\n", number.order);
 }
 
 int print_error(int err)

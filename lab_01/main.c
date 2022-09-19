@@ -22,7 +22,7 @@ int main(void)
     if (err != EXIT_SUCCESS)
         return print_error(err);
 
-    print_double(&result);
+    print_double(result);
 
     return print_error(err);
 }
