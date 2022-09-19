@@ -1,5 +1,16 @@
 #include "read.h"
 
+int read_int(int_t *number)
+{
+    int err = EXIT_SUCCESS;
+    print_msg_start();
+    print_msg_read_int();
+
+    err = read_int_str(number->num, &(number->len_num), MAX_INT_LEN + 1);
+
+    return err;
+}
+
 int read_double(double_t *number)
 {
     int err = EXIT_SUCCESS;
@@ -24,6 +35,48 @@ int read_double(double_t *number)
     normalize_number(number);
 
     return err;
+}
+
+int read_int_str(char *read_str, short int *count, int max_int_len) {
+    char ch;
+    *count = 0;
+    _Bool zeros_flag = true;
+
+    while ((ch = getchar()) != '\n' && ch != EOF && *count < max_int_len + 1) {
+        if (ch == ' ')
+            continue;
+
+        if ('0' == ch && *count > 1 && zeros_flag)
+            continue;
+
+        if (ch < '0' || ch > '9') {
+            if (*count != 0 || (0 == *count && ch != '-' && ch != '+'))
+                return ERR_READ_INT_STR;
+        }
+
+        if (0 == *count && ch != '-' && ch != '+')
+            read_str[(*count)++] = '+';
+
+        if (ch != '0' && zeros_flag) {
+            zeros_flag = false;
+
+            if (*count > 1)
+                (*count)--;
+        }
+        read_str[(*count)++] = ch;
+    }
+
+    if (*count > max_int_len)
+        return ERR_WRONG_LEN;
+
+    if (*count == 0)
+    {
+        read_str[(*count)++] = '+';
+    }
+
+    read_str[*count] = '\0';
+
+    return EXIT_SUCCESS;
 }
 
 int read_mantissa(double_t *number)
@@ -103,46 +156,7 @@ int read_mantissa(double_t *number)
     return EXIT_SUCCESS;
 }
 
-int read_int_str(char *read_str, short int *count, int max_int_len)
-{
-    char ch;
-    *count = 0;
-    _Bool zeros_flag = true;
 
-    while ((ch = getchar()) != '\n' && ch != EOF && *count < max_int_len + 1)
-    {
-        if (ch == ' ')
-            continue;
-
-        if ('0' == ch && *count > 1 && zeros_flag)
-            continue;
-
-        if (ch < '0' || ch > '9')
-        {
-            if (*count != 0 || (0 == *count && ch != '-' && ch != '+'))
-                return ERR_READ_INT_STR;
-        }
-
-        if (0 == *count && ch != '-' && ch != '+')
-            read_str[(*count)++] = '+';
-
-        if (ch != '0' && zeros_flag)
-        {
-            zeros_flag = false;
-
-            if (*count > 1)
-                (*count)--;
-        }
-        read_str[(*count)++] = ch;
-    }
-
-    if (*count > max_int_len)
-        return ERR_WRONG_LEN;
-
-    read_str[*count] = '\0';
-
-    return EXIT_SUCCESS;
-}
 
 int read_order(int *order)
 {
@@ -203,15 +217,4 @@ void normalize_number(double_t *number)
         number->len_num++;
         number->order = 0;
     }
-}
-
-int read_int(int_t *number)
-{
-    int err = EXIT_SUCCESS;
-    print_msg_start();
-    print_msg_read_int();
-
-    err = read_int_str(number->num, &(number->len_num), MAX_INT_LEN + 1);
-
-    return err;
 }

@@ -16,5 +16,4 @@
 
 #define FINISH_INPUT -1
 
-
 #endif // __DEFS_H__
