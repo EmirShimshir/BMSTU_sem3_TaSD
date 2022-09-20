@@ -3,7 +3,6 @@
 int read_int(int_t *number)
 {
     int err = EXIT_SUCCESS;
-    print_msg_start();
     print_msg_read_int();
 
     err = read_int_str(number->num, &(number->len_num), MAX_INT_LEN + 1);
@@ -15,6 +14,7 @@ int read_double(double_t *number)
 {
     int err = EXIT_SUCCESS;
 
+    print_msg_start();
     print_msg_read_double();
 
     err = read_mantissa(number);
@@ -90,6 +90,8 @@ int read_mantissa(double_t *number)
     number->len_num = 0;
     number->order = 0;
 
+
+
     while ((ch = getchar()) != 'e' && ch != 'E' && ch != '\n' && ch != EOF)
     {
         if (ch == ' ')
@@ -140,6 +142,9 @@ int read_mantissa(double_t *number)
     }
 
     number->point_place = number->len_num - current_point_place;
+
+    if (0 == number->len_num && ((ch == 'e') || (ch == 'E')))
+        return ERR_WRONG_CHAR;
 
     if (0 == number->len_num)
     {
