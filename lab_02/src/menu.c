@@ -1,248 +1,269 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "menu.h"
-#include "picker.h"
+#include "cars.h"
+#include "my_string.h"
+#include "read_cars.h"
+#include "print_cars.h"
+#include "errors.h"
 
-#define MENU_BACK_TEXT "Back"
-#define MENU_EXIT_TEXT "Exit"
-#define ACTIVE_COLOR "\033[1;31m"
-
-struct Menu
+void print_error_message(const int code)
 {
-    struct MenuItemsList *items;
-};
+    if (ERR_WRONG_ACTION == code)
+    {
+        puts("\nВведенный код не соответствует ни одному действию.");
+        puts("Попробуйте ещё раз.\n");
+    }
+    else if (ERR_READ_ACTION == code)
+    {
+        puts("\nНекорректный ввод кода действия.");
+        puts("Попробуйте ещё раз.\n");
+    }
+    else if (ERR_CLOSE_FILE == code)
+        puts("\nОшибка при закрытии файла!");
 
-void execute_menu_item(menu_t menu, struct Node *node);
+    else if (ERR_OPEN_FILE == code)
+        puts("\nОшибка при открытии файла!");
 
-menu_t create_menu()
-{
-    menu_t menu = malloc(sizeof(struct Menu));
+    else if (ERR_READ_FILE_NAME == code)
+        puts("\nНекорректное имя файла!");
 
-    menu->items = malloc(sizeof(struct MenuItemsList));
-    init(menu->items);
+    else if (ERR_TOO_LONG_STR == code)
+        puts("\nСлишком длинная строка записи!");
 
-    return menu;
+    else if (ERR_TOO_LONG_BRAND == code)
+        puts("\nСлишком длинная строка марки!");
+
+    else if (ERR_TOO_LONG_COUNTRY == code)
+        puts("\nСлишком длинная строка страны!");
+
+    else if (ERR_TOO_LONG_COLOR == code)
+        puts("\nСлишком длинная строка цвета!");
+
+    else if (ERR_TOO_LONG_PRICE == code)
+        puts("\nСлишком длинная строка цены!");
+
+    else if (ERR_TOO_LONG_CONDITION == code)
+        puts("\nНекорректный пункт состояния автомобиля!");
+
+    else if (ERR_TOO_LONG_WARRANTY == code)
+        puts("\nСлишком длинная строка гарантии!");
+
+    else if (ERR_TOO_LONG_YEAR == code)
+        puts("\nСлишком длинная строка года!");
+
+    else if (ERR_TOO_LONG_MILEAGE == code)
+        puts("\nСлишком длинная строка пробега!");
+
+    else if (ERR_TOO_LONG_REPAIRS_NUM == code)
+        puts("\nСлишком длинная строка количества ремонтов!");
+
+    else if (ERR_TOO_LONG_OWNERS_NUM == code)
+        puts("\nСлишком длинная строка количества собственников!");
+
+    else if (ERR_READ_PRICE == code)
+        puts("\nЦена -- целое число!");
+
+    else if (ERR_WRONG_PRICE == code)
+        puts("\nВведенная цена выходит за допустимый диапазон значений!");
+
+    else if (ERR_WRONG_CONDITION == code)
+        puts("\nСостояние задано некорректно (в файле только new или used, в строке -- n/N или u/U)!");
+
+    else if (ERR_USED_WARRANTY == code)
+        puts("\nУ б/у автомобилей не должно быть гарантии!");
+
+    else if (ERR_READ_WARRANTY == code)
+        puts("\nГарантия -- целое число!");
+
+    else if (ERR_WRONG_WARRANTY == code)
+        puts("\nВведенная гарантия выходит за доспустимый диапазон значений!");
+
+    else if (ERR_NEW_YEAR == code)
+        puts("\nУ нового автомобиля не должно быть года выпуска!");
+
+    else if (ERR_READ_YEAR == code)
+        puts("\nГод -- целое число!");
+
+    else if (ERR_WRONG_YEAR == code)
+        puts("\nЗначение года выходит за допустимый диапазон значений!");
+
+    else if (ERR_NEW_MILEAGE == code)
+        puts("\nУ нового автомобиля не должно быть пробега!");
+
+    else if (ERR_READ_MILEAGE == code)
+        puts("\nПробег -- целое число!");
+
+    else if (ERR_WRONG_MILEAGE == code)
+        puts("\nЗначение пробега выходит за допустимый диапазон значений!");
+
+    else if (ERR_NEW_OWNERS_NUM == code)
+        puts("\nУ нового автомобиля не должно быть собственников!");
+
+    else if (ERR_READ_OWNERS_NUM == code)
+        puts("\nКоличество собственников -- целое число!");
+
+    else if (ERR_WRONG_OWNERS_NUM == code)
+        puts("\nЗначение количества собственников выходит за допустимый диапазон значений!");
+
+    else if (ERR_NEW_REPAIRS_NUM == code)
+        puts("\nУ нового автомобиля не должно быть ремонта!");
+
+    else if (ERR_READ_REPAIRS_NUM == code)
+        puts("\nКоличество ремонтов -- целое число!");
+
+    else if (ERR_WRONG_REPAIRS_NUM == code)
+        puts("\nЗначение количества ремонтов выходи за допустимый диапазон значений");
+
+    else if (ERR_NO_CARS == code)
+        puts("\nМашин с такой ценой нет!");
+
+    else if (ERR_INCORRECT_PRICES == code)
+        puts("\nЦена \"от\" должна быть ниже цены \"до\"!");
+
+    else if (ERR_NO_RECORDS == code)
+        puts("\nПо заданному запросу ничего не найдено!");
+
+    else if (ERR_EMPTY_FILE == code)
+        puts("\nПустой файл!");
+
+    else if (ERR_INCORRECT_FILE == code)
+        puts("\nНеверный формат данных в файле!");
+
+    else if (ERR_TOO_BIG_FILE == code)
+        puts("\nСлишком большой файл!");
 }
 
-void add_command(menu_t menu, void(*func)(void), const char *description)
+void print_menu(void)
 {
-    struct MenuItem item =
+    printf("\n"
+    "     МЕНЮ\n"
+    "\n"
+    "1  - Загрузить таблицу машин из файла\n"
+    "2  - Просмотреть таблицу\n"
+    "3  - Добавить информацию о новой стране в конец таблицы\n"
+    "4  - Удалить страны из списка по количеству жителей\n"
+    "5  - Просмотреть отсортированную по количеству жителей таблицу ключей\n"
+    "6  - Вывести упорядоченную по количеству жителей таблицу\n"
+    "7  - Вывести таблицу в упорядоченном по количеству жителей виде по упорядоченной таблице ключей\n"
+    "8  - Сравнить эффективность работы программы способами 6 и 7\n"
+    "9  - Сравнить время работы сортировок (пирамидальной и вставками)\n"
+    "10 - Вывести список стран на выбранном материке, где можно заняться указанным видом спорта\n"
+    "0  - Выход\n"
+    "\n")
+}
+
+int choose_action(int *const action);
+{
+    printf("Выберете пункт меню: \n");
+
+    char str[MAX_MENU_ITEM_LEN + 2];
+    if (read_str(str, MAX_MENU_ITEM_LEN + 3, stdin))
+        return ERR_READ_ACTION;
+
+    char *end_prt;
+    long int long_str = strtol(str, &end_prt, 10);
+
+    if (*end_prt != '\0')
+        return ERR_WRONG_ACTION;
+
+    if (long_str < 0 || long_str > 10)
+        return ERR_WRONG_ACTION;
+
+    *action = (short int) long_str;
+
+    return READ_OK;
+}
+
+int do_action(const int action, country_table_t *table)
+{
+    int exit_code = OK_ACTION;
+    car_key_table_t keys;
+    car_table_t sorted_table;
+
+    switch (action)
+    {
+        case 1:
+            exit_code = upload_from_file(table);
+
+            if (!exit_code)
+                puts("\nДанные успешно загружены!");
+
+            break;
+
+        case 2:
+            print_cars(table);
+            break;
+
+        case 3:
+            exit_code = read_record(table);
+            break;
+
+        case 4:
+            if (table->len)
+                exit_code = delete_record(table);
+
+            else
+                puts("\nВ таблице нет данных!");
+
+            break;
+
+        case 5:
+            create_sort_keys_table(table, &keys);
+            print_cars_keys(&keys);
+            break;
+
+        case 6:
+            sorted_table = *table;
+            heapsort(&sorted_table.table, sorted_table.len, sizeof(car_t), &compare_records);
+            print_cars(&sorted_table);
+            break;
+
+        case 7:
+            create_sort_keys_table(table, &keys);
+            print_cars_by_keys(table, &keys);
+            break;
+
+        case 8:
+            if (table->len)
             {
-                    .description = description,
-                    .type = COMMAND_TYPE_ITEM,
-                    .entity.func = func,
-                    .is_active = DEFAULT_STATE
-            };
-
-    push(menu->items, &item);
-}
-
-void add_args_command(menu_t menu, void(*func)(void *), const char *description, void *packed_args)
-{
-    struct MenuItem item =
+                create_keys_table(table, &keys);
+                compare_heapsorts(table, &keys);
+            }
+            else
             {
-                    .description = description,
-                    .type = COMMAND_W_DATA_TYPE_ITEM,
-                    .entity.func_w_data = func,
-                    .is_active = DEFAULT_STATE,
-                    .packed_args = packed_args
-            };
+                puts("\nВ таблице нет данных!");
+                puts("Для оценки эффективности добавьте данные!");
+            }
 
-    push(menu->items, &item);
-}
+            break;
 
-void add_exit(menu_t menu, const char *description)
-{
-    struct MenuItem item =
+        case 9:
+            if (table->len)
             {
-                    .description = description,
-                    .type = EXIT_TYPE_ITEM,
-                    .is_active = DEFAULT_STATE
-            };
-
-    push(menu->items, &item);
-}
-
-void add_sub_menu(menu_t menu, menu_t sub_menu, const char *description)
-{
-    struct MenuItem item =
+                create_keys_table(table, &keys);
+                compare_sorts_types(table, &keys);
+            }
+            else
             {
-                    .description = description,
-                    .type = MENU_TYPE_ITEM,
-                    .entity.menu = sub_menu,
-                    .is_active = DEFAULT_STATE
-            };
+                puts("\nВ таблице нет данных!");
+                puts("Для оценки эффективности добавьте данные!");
+            }
 
-    push(menu->items, &item);
-    sub_menu->items->head->element->is_active = ACTIVE_STATE;
-    add_exit(sub_menu, MENU_BACK_TEXT);
-}
+            break;
 
-void print_menu(menu_t menu)
-{
-    struct Node *node = menu->items->head;
+        case 10:
+            exit_code = find_records(table);
+            break;
 
-    set_cursor_to_start();
-
-    while (node != NULL)
-    {
-        struct MenuItem *item = node->element;
-
-        if (item->is_active == ACTIVE_STATE)
-        {
-            printf(ACTIVE_COLOR);
-            printf("%s\n", item->description);
-            printf("\033[0m");
-        }
-        else
-        {
-            printf("%s\n", item->description);
-        }
-
-        node = node->next;
+        default:
+            puts("\nСпасибо за использование программы!");
+            puts("Автор:  МАСЛОВА МАРИНА");
+            puts("Группа: ИУ7-33Б");
+            exit(EXIT_SUCCESS);
+            break;
     }
-}
 
-void print_back_menu()
-{
-    printf(ACTIVE_COLOR);
-    printf("\n%s", MENU_BACK_TEXT);
-    printf("\033[0m");
-}
-
-void select_next_item(menu_t menu, struct Node **node)
-{
-    (*node)->element->is_active = DEFAULT_STATE;
-
-    if ((*node)->next != NULL)
-    {
-        (*node)->next->element->is_active = ACTIVE_STATE;
-        *node = (*node)->next;
-    }
-    else
-    {
-        *node = menu->items->head;
-        (*node)->element->is_active = ACTIVE_STATE;
-    }
-}
-
-
-void select_prev_item(menu_t menu, struct Node **node)
-{
-    (*node)->element->is_active = DEFAULT_STATE;
-
-    if ((*node)->prev != NULL)
-    {
-        (*node)->prev->element->is_active = ACTIVE_STATE;
-        *node = (*node)->prev;
-    }
-    else
-    {
-        *node = menu->items->tail;
-        (*node)->element->is_active = ACTIVE_STATE;
-    }
-}
-
-void invoke_void_func(struct Node* node)
-{
-    node->element->entity.func();
-}
-
-void invoke_data_func(struct Node* node)
-{
-    node->element->entity.func_w_data(node->element->packed_args);
-}
-
-void execute_command(menu_t menu, struct Node *node, void(*invoke_func)(struct Node*))
-{
-    clear_console();
-    invoke_func(node);
-    print_back_menu();
-    while (read_key() != ENTER_KEY);
-    clear_console();
-    print_menu(menu);
-
-}
-
-void menu_worker(menu_t menu)
-{
-    clear_console();
-
-    struct Node *node = menu->items->head;
-    while (node->element->is_active != ACTIVE_STATE)
-        node = node->next;
-
-    print_menu(menu);
-    while (1)
-    {
-        print_menu(menu);
-
-        key_e c = read_key();
-
-        switch (c)
-        {
-            case DOWN_KEY:
-                select_next_item(menu, &node);
-                break;
-            case UP_KEY:
-                select_prev_item(menu, &node);
-                break;
-            default:
-                switch (node->element->type)
-                {
-                    case COMMAND_TYPE_ITEM:
-                        execute_command(menu, node, invoke_void_func);
-                        break;
-                    case COMMAND_W_DATA_TYPE_ITEM:
-                        execute_command(menu, node, invoke_data_func);
-                        break;
-                    case MENU_TYPE_ITEM:
-                        execute_menu_item(menu, node);
-                        break;
-                    default:
-                        clear_console();
-                        return;
-                }
-        }
-    }
-}
-
-void execute_menu_item(menu_t menu, struct Node *node)
-{
-    clear_console();
-    menu_worker(node->element->entity.menu);
-    print_menu(menu);
-}
-
-void execute_menu(menu_t menu)
-{
-    add_exit(menu, MENU_EXIT_TEXT);
-    struct Node *node = menu->items->head;
-    node->element->is_active = ACTIVE_STATE;
-    menu_worker(menu);
-}
-
-void free_menu(menu_t menu)
-{
-    struct Node *node = menu->items->head;
-
-    while (node != NULL)
-    {
-        struct Node *next = node->next;
-
-        if (node->element->type == MENU_TYPE_ITEM)
-        {
-            free_menu(node->element->entity.menu);
-        }
-
-        if (node->element->type == COMMAND_W_DATA_TYPE_ITEM)
-        {
-            free(node->element->packed_args);
-        }
-
-        free_node(node);
-        node = next;
-    }
-    free(menu->items);
-    free(menu);
+    return exit_code;
 }
