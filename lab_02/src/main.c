@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "countries.h"
 #include "menu.h"
 #include "add_del.h"
@@ -5,13 +9,8 @@
 #include "print.h"
 #include "compare.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 int main(void)
 {
-    setbuf(stdout, NULL);
     FILE *f = NULL;
     char *filename = "./data/flats40.txt";
     int key;
