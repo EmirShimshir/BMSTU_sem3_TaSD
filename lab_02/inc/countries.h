@@ -42,7 +42,7 @@ typedef union
 typedef struct
 {
     char country[MAX_FIELD];
-    char capital[MAX_FIELD;
+    char capital[MAX_FIELD];
     char mainland[MAX_FIELD];
     int count_people;
     int need_PCR;
@@ -52,20 +52,8 @@ typedef struct
 
 typedef struct
 {
-    country_t table[MAX_TABLE];
-    size_t len;
-} country_table_t;
-
-typedef struct
-{
     int index;
     int count_people;
 } country_key_t;
-
-typedef struct
-{
-    car_key_t table[MAX_TABLE];
-    size_t len;
-} car_key_table_t;
 
 #endif // __COUNTRIES_H__

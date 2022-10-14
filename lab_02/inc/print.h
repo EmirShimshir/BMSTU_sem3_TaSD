@@ -7,13 +7,13 @@
 #include "stdio.h"
 
 void print_table_rama();
-void print_table_key(struct keys *key_arr, size_t count);
-void print_table(struct flats *flat, size_t count);
-void print_flat(struct flats flat, size_t count);
+//void print_table_key(country_key_t *key_arr, size_t count);
+void print_table(country_t *country, size_t count);
+void print_country(country_t country, size_t count);
 
 void print_info(void);
 void print(void);
-void print_rules_add(void);
-void print_rules_del(void);
+//void print_rules_add(void);
+//void print_rules_del(void);
 
 #endif // __PRINT_H__

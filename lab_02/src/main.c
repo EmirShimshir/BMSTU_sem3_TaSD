@@ -2,28 +2,28 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "countries.h"
-#include "menu.h"
-#include "add_del.h"
-#include "read.h"
-#include "print.h"
-#include "compare.h"
+#include "../inc/menu.h"
+#include "../inc/add_del.h"
+#include "../inc/read.h"
+#include "../inc/print.h"
+#include "../inc/compare.h"
+#include "../inc/countries.h"
 
 int main(void)
 {
     FILE *f = NULL;
-    char *filename = "./data/flats40.txt";
+    char *filename = "./data/countries_50.txt";
     int key;
     size_t count = 0;
     int error = 0;
 
-    struct flats flat_arr[MAX_FLAT + 1];
-    struct keys key_arr[MAX_FLAT + 1];
+    country_t country_arr[MAX_TABLE + 1];
+    country_key_t key_arr[MAX_TABLE + 1];
 
-    if(read_table(f, filename, flat_arr, &count))
+    if(read_table(f, filename, country_arr, &count))
         return EXIT_FAILURE;
 
-    read_table_key(flat_arr, key_arr, count);
+    read_table_key(country_arr, key_arr, count);
     print_info();
     print();
 
@@ -36,7 +36,7 @@ int main(void)
     if (key == 0)
         return EXIT_SUCCESS;
 
-    while(!(error = check_key(key, flat_arr, &count, key_arr, filename)))
+    while(!(error = check_key(key, country_arr, &count, key_arr, filename)))
     {
         print();
         if(scanf("%d", &key) != 1)
