@@ -1,42 +1,53 @@
-#include "../inc/menu.h"
-#include "countries.h"
-#include "../inc/errors.h"
-#include "../inc/print.h"
+#include "struct_flats.h"
+#include "menu.h"
+#include "add_del_flat.h"
+#include "read_file.h"
+#include "print.h"
+#include "compare.h"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 int main(void)
 {
-    LOG_INFO("started");
-    int err = EXIT_SUCCESS;
+    setbuf(stdout, NULL);
+    FILE *f = NULL;
+    char *filename = "./data/flats40.txt";
+    int key;
+    size_t count = 0;
+    int error = 0;
 
-    print_start_msg();
+    struct flats flat_arr[MAX_FLAT + 1];
+    struct keys key_arr[MAX_FLAT + 1];
 
-    country_table_t table;
-    table.len = 0;
+    if(read_table(f, filename, flat_arr, &count))
+        return EXIT_FAILURE;
 
-    while (1)
+    read_table_key(flat_arr, key_arr, count);
+    print_info();
+    print();
+
+
+    if(scanf("%d", &key) != 1)
     {
-        print_menu_msg();
-
-        int action; // -?
-        err = choose_action(&action);
-        if (err != EXIT_SUCCESS)
-        {
-            LOG_ERROR(get_err_name(err));
-            print_error_msg(err);
-            continue;
-            // return err;
-        }
-
-        err = do_action(action, &table);
-        if (err != EXIT_SUCCESS)
-        {
-            LOG_ERROR(get_err_name(err));
-            print_error_msg(err);
-            continue;
-            // return err;
-        }
+        printf("\nError key, please, try again according the rules\n");
+        return ERROR_KEY;
     }
+    if (key == 0)
+        return EXIT_SUCCESS;
 
-    LOG_INFO("done successfully");
-    return err;
+    while(!(error = check_key(key, flat_arr, &count, key_arr, filename)))
+    {
+        print();
+        if(scanf("%d", &key) != 1)
+        {
+            printf("\nError key, please, try again according the rules\n");
+            return ERROR_KEY;
+        }
+        if (key == 0)
+            return EXIT_SUCCESS;
+    }
+    return error;
+
 }

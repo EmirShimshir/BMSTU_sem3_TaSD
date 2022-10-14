@@ -1,8 +1,19 @@
-#ifndef __PRINT_H__
+#ifndef _PRINT_H
+#define _PRINT_H
 
-#define __PRINT_H__
+#include "struct_flats.h"
 
-void print_start_msg(void)
-void print_menu_msg(void);
+#include "stdlib.h"
+#include "stdio.h"
 
-#endif // __PRINT_H__
+void print_table_rama();
+void print_table_key(struct keys *key_arr, size_t count);
+void print_table(struct flats *flat, size_t count);
+void print_flat(struct flats flat, size_t count);
+
+void print_info(void);
+void print(void);
+void print_rules_add(void);
+void print_rules_del(void);
+
+#endif
