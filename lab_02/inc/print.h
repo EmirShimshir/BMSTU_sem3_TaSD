@@ -1,7 +1,7 @@
-#ifndef _PRINT_H
-#define _PRINT_H
+#ifndef __PRINT_H__
+#define __PRINT_H__
 
-#include "struct_flats.h"
+#include "countries.h"
 
 #include "stdlib.h"
 #include "stdio.h"
@@ -16,4 +16,4 @@ void print(void);
 void print_rules_add(void);
 void print_rules_del(void);
 
-#endif
+#endif // __PRINT_H__

@@ -1,8 +1,8 @@
-#ifndef _ADD_DEL_FLAT_H
-#define _ADD_DEL_FLAT_H
+#ifndef __ADD_DEL_H__
+#define __ADD_DEL_H__
 
-#include "struct_flats.h"
-#include "read_file.h"
+#include "countries.h"
+#include "read.h"
 #include "print.h"
 
 #include "stdio.h"
@@ -24,4 +24,4 @@ void del_file(struct flats *flat_arr, size_t count, char *filename);
 void del_flat(struct flats *flat_arr, size_t *count, int square, char *filename);
 void swap(struct flats *flat_arr, size_t *count, size_t i);
 
-#endif
+#endif // __ADD_DEL_H__

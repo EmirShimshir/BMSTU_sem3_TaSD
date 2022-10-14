@@ -1,4 +1,4 @@
-#include "find_flats.h"
+#include "find.h"
 
 int find_flats(struct flats *arr_flats, size_t count)
 {

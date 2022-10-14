@@ -1,4 +1,4 @@
-#include "sort_flats.h"
+#include "sort.h"
 
 int compare(const void *a, const void *b)
 {

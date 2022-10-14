@@ -1,7 +1,7 @@
-#include "struct_flats.h"
+#include "countries.h"
 #include "menu.h"
-#include "add_del_flat.h"
-#include "read_file.h"
+#include "add_del.h"
+#include "read.h"
 #include "print.h"
 #include "compare.h"
 

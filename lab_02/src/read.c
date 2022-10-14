@@ -1,4 +1,4 @@
-#include "read_file.h"
+#include "read.h"
 
 int read_table(FILE *f, char *filename, struct flats *flat, size_t *count)
 {
