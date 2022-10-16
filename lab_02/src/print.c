@@ -12,7 +12,7 @@ void print_table(country_t *country, size_t count)
 
 void print_country(country_t country, size_t count)
 {
-    printf("|%*zu|", 3, count);
+    printf("|%*zu|", 5, count);
     printf("%*s|", 15, country.country);
     printf("%*d|", 15, country.count_people);
     printf("%*s|", 15, country.capital);
@@ -61,7 +61,7 @@ void print_country(country_t country, size_t count)
 void print_info(void)
 {
     printf("\n"
-           "Shimshir Emirdzan IU7-33B var-22\n"
+           "Shimshir Emirdzan IU7-33B var-24\n"
            "This programm can show you the tables with countries and sort thoose tables.\n"
            "MENU:\n"
            "\n");
@@ -104,14 +104,14 @@ void print_rules_del(void)
 
 void print_line(void)
 {
-    printf("|---|---------------|---------------|---------------|---------------|---------------|---------------|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|\n",
+    printf("|-----|---------------|---------------|---------------|---------------|---------------|---------------|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|\n",
            REDT, NORMALT, REDT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, BLUET, NORMALT, BLUET, NORMALT
            );
 }
 void print_table_head(void)
 {
     print_line();
-    printf("| № |    country    |  count people |    capital    |   mainland    |   need PCR    |    tourism    | %sexcursion type%s| %scount objects%s |  %sbeach season%s |    %stemp air%s   |   %stemp water%s  |  %stime flight%s  |   %ssport type%s  |    %smin price%s  |\n",
+    printf("|  №  |    country    |  count people |    capital    |   mainland    |   need PCR    |    tourism    | %sexcursion type%s| %scount objects%s |  %sbeach season%s |    %stemp air%s   |   %stemp water%s  |  %stime flight%s  |   %ssport type%s  |    %smin price%s  |\n",
            REDT, NORMALT, REDT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, BLUET, NORMALT, BLUET, NORMALT
     );
     print_line();
