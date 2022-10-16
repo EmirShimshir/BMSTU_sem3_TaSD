@@ -5,9 +5,9 @@ Ukraine 9798209 Colorado North_America 1 Excursion 72 Nature
 Britain 4679479 Minsk Oceania 0 Beach Summer 17 30 221 
 USA 154682 Moscow Europe 1 Sport Skiing 640607 
 Russia 2920963 Humburg South_America 1 Excursion 16 Nature 
-USA 8517944 Moscow Asia 0 Excursion 39 History 
-USA 3358201 Chelyabinsk Europe 1 Excursion 32 Nature 
-Japan 7339131 Chelyabinsk North_America 1 Excursion 36 Art 
+USA 8517944 Moscow Asia 0 Excursion 39 History
+USA 3358201 Chelyabinsk Europe 1 Excursion 32 Nature
+Japan 7339131 Chelyabinsk North_America 1 Excursion 36 Art
 Bulgary 1935069 Belgorod North_America 1 Sport Skiing 671126 
 Ukraine 392615 Seul Antarctica 1 Sport Climb 918176 
 Germany 8375702 Zavolzhye North_America 0 Beach Winter -18 26 542 

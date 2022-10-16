@@ -76,4 +76,4 @@ read.o: src/read.c \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/malloc/_malloc.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_dev_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_mode_t.h \
-  src/../inc/read.h inc/countries.h
+  src/../inc/read.h inc/countries.h src/../inc/debug.h
