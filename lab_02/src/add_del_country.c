@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "../inc/add_del_country.h"
 #include "../inc/read.h"
 #include "../inc/debug.h"
+#include "../inc/defs.h"
 #include <string.h>
 #include <ctype.h>
 
@@ -183,7 +183,6 @@ int read_country_stdin(country_t *country)
 int add_country(country_t *country_arr, country_key_t *key_arr, size_t *count)
 {
     LOG_INFO("started");
-
     int err = EXIT_SUCCESS;
     if (*count == MAX_TABLE)
     {
@@ -200,6 +199,7 @@ int add_country(country_t *country_arr, country_key_t *key_arr, size_t *count)
     }
 
     read_key(country_arr, key_arr, (*count)++);
+    LOG_DEBUG("added country in key arr: index == %d, count people == %d", key_arr[*count - 1].index, key_arr[*count - 1].count_people);
 
     LOG_INFO("done successfully");
     return EXIT_SUCCESS;

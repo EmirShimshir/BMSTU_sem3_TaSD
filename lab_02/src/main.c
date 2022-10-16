@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include <string.h>
 
 #include "../inc/countries.h"
@@ -6,6 +5,7 @@
 #include "../inc/read.h"
 #include "../inc/debug.h"
 #include "../inc/menu.h"
+#include "../inc/defs.h"
 
 int main(const int argc, const char **argv)
 {
@@ -13,7 +13,7 @@ int main(const int argc, const char **argv)
     int err = EXIT_SUCCESS;
 
     FILE *f = NULL;
-    char filename[MAX_FILENAME] = {0};
+    char filename[MAX_FILENAME];
 
     err = parse_args(argc, argv, filename);
     if (err != EXIT_SUCCESS)
@@ -43,10 +43,11 @@ int main(const int argc, const char **argv)
 
         if(scanf("%d", &key) != 1)
         {
+            err = ERR_KEY;
             printf("\nError key, please, try again according the rules\n");
-            LOG_ERROR(ERR_KEY);
-            return ERR_KEY;
 
+            LOG_ERROR(err);
+            return err;
         }
 
         LOG_DEBUG("got key == %d", key);
@@ -55,7 +56,7 @@ int main(const int argc, const char **argv)
         {
             printf("\nExit successfully\n");
             LOG_INFO("done successfully");
-            return EXIT_SUCCESS;
+            return err;
         }
 
         err = check_key(key, country_arr, key_arr, &count);

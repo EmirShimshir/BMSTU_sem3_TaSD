@@ -1,8 +1,7 @@
 #ifndef __COUNTRIES_H__
 #define __COUNTRIES_H__
 
-#define MAX_FIELD 15
-#define MAX_TABLE 200
+#include "defs.h"
 
 typedef enum tourism
 {

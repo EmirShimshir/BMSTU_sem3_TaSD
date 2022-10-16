@@ -1,9 +1,11 @@
 #include <stdio.h>
 
 #include "../inc/print.h"
+#include "../inc/defs.h"
 
 void print_table(country_t *country, size_t count)
 {
+    print_table_head();
     for (size_t i = 0; i < count; i++)
         print_country(country[i], i + 1);
 }
@@ -52,6 +54,8 @@ void print_country(country_t country, size_t count)
         printf("%s%*d%s|", BLUET, 15, country.more_info.excursion.count_objects, NORMALT);
     }
     printf("\n");
+    print_line();
+
 }
 
 void print_info(void)
@@ -80,4 +84,29 @@ void print_menu(void)
            "11 - Show sort table by square with table (quick sort)\n"
            "12 - Compare time for bubble sort/qsort and table/table_key \n"
            "Choose key: ");
+}
+
+void print_rules_add(void)
+{
+    printf("\n"
+           "When you enter country to table:\n"
+           "The country, capital, mainland, excursion type, beach season and sport type should be written in one word and max len is 15 symbols.\n"
+           "Other parameters of country are integer numbers.\n"
+           "Please enter them without spaces and letters.\n"
+           "\n");
+}
+
+void print_line(void)
+{
+    printf("|---|---------------|---------------|---------------|---------------|---------------|---------------|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|\n",
+           REDT, NORMALT, REDT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, BLUET, NORMALT, BLUET, NORMALT
+           );
+}
+void print_table_head(void)
+{
+    print_line();
+    printf("| № |    country    |  count people |    capital    |   mainland    |   need PCR    |    tourism    | %sexcursion type%s| %scount objects%s |  %sbeach season%s |    %stemp air%s   |   %stemp water%s  |  %stime flight%s  |   %ssport type%s  |    %smin price%s  |\n",
+           REDT, NORMALT, REDT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, GREENT, NORMALT, BLUET, NORMALT, BLUET, NORMALT
+    );
+    print_line();
 }

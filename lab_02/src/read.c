@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h> // EXIT_FAILURE
 
 #include "../inc/read.h"
 #include "../inc/debug.h"
+#include "../inc/defs.h"
 
 int parse_args(const int argc, const char **argv, char *filename)
 {
@@ -75,68 +75,73 @@ int read_country(FILE *f, country_t *country)
     LOG_INFO("started");
     if (fscanf(f, "%s", country->country) != 1)
     {
-        LOG_DEBUG("%s", "fscanf(f, \"%s\", country->country) != 1");
-        return  EXIT_FAILURE;
+        LOG_ERROR(ERR_READ_COUNTRY);
+        return ERR_READ_COUNTRY;
     }
 
     if (fscanf(f, "%d", &(country->count_people)) != 1)
     {
-        LOG_DEBUG("%s", "fscanf(f, \"%d\", &(country->count_people)) != 1");
-        return  EXIT_FAILURE;
+        LOG_ERROR(ERR_READ_COUNT_PEOPLE);
+        return ERR_READ_COUNT_PEOPLE;
     }
     if (fscanf(f, "%s", country->capital) != 1)
     {
-        LOG_DEBUG("%s", "fscanf(f, \"%s\", country->capital) != 1");
-        return  EXIT_FAILURE;
+        LOG_ERROR(ERR_READ_CAPITAL);
+        return ERR_READ_CAPITAL;
     }
     if (fscanf(f, "%s", country->mainland) != 1)
     {
-        LOG_DEBUG("%s", "fscanf(f, \"%s\", country->mainland) != 1");
-        return  EXIT_FAILURE;
+        LOG_ERROR(ERR_READ_MAINLAND);
+        return ERR_READ_MAINLAND;
     }
     if (fscanf(f, "%d", &(country->need_PCR)) != 1)
     {
-        LOG_DEBUG("%s", "fscanf(f, \"%d\", &(country->need_PCR)) != 1");
-        return  EXIT_FAILURE;
+        LOG_ERROR(ERR_READ_NEED_PCR);
+        return ERR_READ_NEED_PCR;
     }
 
     char temp_tourism[MAX_FIELD];
     if (fscanf(f, "%s", temp_tourism) != 1)
     {
-        LOG_DEBUG("%s", "fscanf(f, \"%s\", temp_tourism) != 1");
-        return  EXIT_FAILURE;
+        LOG_ERROR(ERR_READ_TOURISM);
+        return ERR_READ_TOURISM;
     }
     else
     {
         LOG_DEBUG("tourism == %s", temp_tourism);
+        int err = EXIT_SUCCESS;
         if (strcmp(temp_tourism, "Excursion") == 0)
         {
-            if(read_excursion(f, country) != EXIT_SUCCESS)
+            err = read_excursion(f, country);
+            if(err != EXIT_SUCCESS)
             {
-                LOG_DEBUG("%s", "read_excursion(f, country) != EXIT_SUCCESS");
-                return  EXIT_FAILURE;
+                LOG_ERROR(err);
+                return  err;
             }
         }
         else if (strcmp(temp_tourism, "Beach") == 0)
         {
-            if(read_beach(f, country) != EXIT_SUCCESS)
+            err = read_beach(f, country);
+            if(err != EXIT_SUCCESS)
             {
-                LOG_DEBUG("%s", "read_beach(f, country) != EXIT_SUCCESS");
-                return  EXIT_FAILURE;
+                LOG_ERROR(err);
+                return  err;
             }
         }
         else if  (strcmp(temp_tourism, "Sport") == 0)
         {
-            if(read_sport(f, country) != EXIT_SUCCESS)
+            err = read_sport(f, country);
+            if(err != EXIT_SUCCESS)
             {
-                LOG_DEBUG("%s", "read_sport(f, country) != EXIT_SUCCESS");
-                return  EXIT_FAILURE;
+                LOG_ERROR(err);
+                return  err;
             }
         }
         else
         {
-            LOG_DEBUG("%s", "error tourism type");
-            return  EXIT_FAILURE;
+            err = ERR_TOURISM_TYPE;
+            LOG_ERROR(err);
+            return  err;
         }
     }
 

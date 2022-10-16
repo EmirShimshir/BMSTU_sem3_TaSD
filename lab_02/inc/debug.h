@@ -4,13 +4,9 @@
 
 #include <stdio.h>
 
-char *get_err_name(int err);
+#include "defs.h"
 
-#define NORMALD "\033[0m"
-#define REDD "\033[31m"
-#define GREEND "\033[32m"
-#define BLUED "\033[36m"
-#define MAGENTAD "\x1B[35m"
+char *get_err_name(int err);
 
 #ifdef DEBUG
 #define LOG_INFO(...) printf("%sINFO%s  | %-20s | %s\n" , MAGENTAD, NORMALD, __func__, __VA_ARGS__)
