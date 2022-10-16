@@ -217,33 +217,17 @@ void del_country(country_t *country_arr, size_t *count, int count_people)
     }
 }
 
+void swap(country_t *country_a, country_t *country_b)
+{
+    country_t temp_country;
+    memcpy(&temp_country, country_a, sizeof(country_t));
+    memcpy(country_a, country_b, sizeof(country_t));
+    memcpy(country_b, &temp_country, sizeof(country_t));
+
+}
 void move(country_t *country_arr, size_t *count, size_t i)
 {
     for(size_t j = i; j < *count - 1; j++)
-    {
-        strncpy((country_arr + j)->country, (country_arr + j + 1)->country, MAX_FIELD - 1);
-        (country_arr + j)->count_people = (country_arr + j + 1)->count_people;
-        strncpy((country_arr + j)->capital, (country_arr + j + 1)->capital, MAX_FIELD - 1);
-        strncpy((country_arr + j)->mainland, (country_arr + j + 1)->mainland, MAX_FIELD - 1);
-        (country_arr + j)->need_PCR = (country_arr + j + 1)->need_PCR;
-        switch ((country_arr + j + 1)->tourism) {
-            case EXCURSION:
-                strncpy((country_arr + j)->more_info.excursion.excursion_type, (country_arr + j + 1)->more_info.excursion.excursion_type, MAX_FIELD - 1);
-                (country_arr + j)->more_info.excursion.count_objects = (country_arr + j + 1)->more_info.excursion.count_objects;
-                break;
-            case BEACH:
-                strncpy((country_arr + j)->more_info.beach.beach_type, (country_arr + j + 1)->more_info.beach.beach_type, MAX_FIELD - 1);
-                (country_arr + j)->more_info.beach.temperature_air = (country_arr + j + 1)->more_info.beach.temperature_air;
-                (country_arr + j)->more_info.beach.temperature_water = (country_arr + j + 1)->more_info.beach.temperature_water;
-                (country_arr + j)->more_info.beach.time_flight = (country_arr + j + 1)->more_info.beach.time_flight;
-                break;
-            case SPORT:
-                strncpy((country_arr + j)->more_info.sport.sport_type, (country_arr + j + 1)->more_info.sport.sport_type, MAX_FIELD - 1);
-                (country_arr + j)->more_info.sport.price_min = (country_arr + j + 1)->more_info.sport.price_min;
-                break;
-            default:
-                LOG_ERROR(ERR_TOURISM_TYPE);
-                LOG_DEBUG("i == %zu, j == %zu", i, j);
-        }
-    }
+        swap(country_arr + j, country_arr + j + 1);
+
 }
