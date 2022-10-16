@@ -1,0 +1,50 @@
+China 478065 Humburg South_America 1 Beach Spring 21 24 700 
+Bulgary 675173 Belgorod Antarctica 0 Sport Climb 261177 
+China 6815457 Zavolzhye Europe 0 Excursion 13 Art 
+Ukraine 9798209 Colorado North_America 1 Excursion 72 Nature 
+Britain 4679479 Minsk Oceania 0 Beach Summer 17 30 221 
+USA 154682 Moscow Europe 1 Sport Skiing 640607 
+Russia 2920963 Humburg South_America 1 Excursion 16 Nature 
+USA 8517944 Moscow Asia 0 Excursion 39 History 
+USA 3358201 Chelyabinsk Europe 1 Excursion 32 Nature 
+Japan 7339131 Chelyabinsk North_America 1 Excursion 36 Art 
+Bulgary 1935069 Belgorod North_America 1 Sport Skiing 671126 
+Ukraine 392615 Seul Antarctica 1 Sport Climb 918176 
+Germany 8375702 Zavolzhye North_America 0 Beach Winter -18 26 542 
+Australia 4890780 Colorado South_America 1 Beach Spring -27 9 476 
+Japan 4985289 London Antarctica 0 Beach Winter -27 25 712 
+Japan 4749998 London Antarctica 1 Excursion 39 History 
+China 8457013 Zavolzhye Europe 1 Beach Autumn 32 24 336 
+Ukraine 4098931 Humburg Africa 0 Excursion 7 History 
+Georgia 1504253 Seul South_America 0 Excursion 66 Nature 
+Australia 7835939 London North_America 0 Sport Climb 867936 
+Australia 6491682 Minsk Europe 0 Sport Surfing 175473 
+Australia 8045910 Moscow Antarctica 0 Beach Winter 33 0 154 
+Britain 35726 Colorado North_America 1 Sport Climb 339734 
+Australia 5556598 Colorado Oceania 0 Beach Winter 24 5 630 
+USA 8429237 Chelyabinsk Oceania 1 Sport Skiing 117830 
+Australia 6807170 Belgorod Oceania 0 Beach Winter -2 8 302 
+Russia 9003521 Chelyabinsk Europe 1 Sport Surfing 330563 
+Japan 7743616 Odessa South_America 0 Beach Autumn 6 14 417 
+Japan 1038989 Sochi South_America 1 Excursion 23 Art 
+Britain 5404643 Seul South_America 0 Excursion 78 History 
+Australia 7641487 Humburg North_America 0 Sport Skiing 986696 
+Bulgary 4553655 London South_America 0 Sport Surfing 989889 
+Russia 1118745 Chelyabinsk North_America 0 Excursion 54 Nature 
+Japan 9308767 Zavolzhye Europe 0 Beach Summer 36 20 444 
+Belarus 3873394 Colorado North_America 0 Sport Climb 465622 
+Japan 668708 London Europe 1 Beach Autumn -20 28 477 
+Georgia 3835993 Sochi Europe 1 Excursion 30 Art 
+China 8073801 Belgorod Antarctica 0 Beach Summer -8 10 505 
+Belarus 5398071 Seul Oceania 1 Excursion 58 Nature 
+Georgia 3111671 Moscow Europe 0 Sport Skiing 188996 
+Germany 2061628 Sochi Asia 0 Sport Climb 428659 
+Russia 4530716 Sochi North_America 0 Sport Surfing 648988 
+Bulgary 310677 Colorado Oceania 1 Beach Autumn -1 22 148 
+Australia 4162802 Minsk South_America 0 Excursion 32 Art 
+Georgia 6423640 Chelyabinsk Oceania 0 Excursion 3 Nature 
+Germany 3208078 Seul Antarctica 0 Beach Winter 26 4 5 
+Germany 4600327 Zavolzhye Asia 1 Sport Climb 777231 
+Belarus 1350093 London Oceania 0 Excursion 70 Nature 
+Belarus 4461932 Chelyabinsk Africa 0 Excursion 73 Nature 
+Australia 8626346 Odessa Antarctica 1 Beach Summer -16 26 77 
