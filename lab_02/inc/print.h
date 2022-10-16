@@ -12,6 +12,7 @@ void print_country(country_t country, size_t count);
 void print_info(void);
 void print_menu(void);
 void print_rules_add(void);
+void print_rules_del(void);
 
 
 #endif // __PRINT_H__

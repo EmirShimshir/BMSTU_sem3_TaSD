@@ -42,9 +42,9 @@ Germany 2061628 Sochi Asia 0 Sport Climb 428659
 Russia 4530716 Sochi North_America 0 Sport Surfing 648988 
 Bulgary 310677 Colorado Oceania 1 Beach Autumn -1 22 148 
 Australia 4162802 Minsk South_America 0 Excursion 32 Art 
-Georgia 6423640 Chelyabinsk Oceania 0 Excursion 3 Nature 
+Georgia 1 Chelyabinsk Oceania 0 Excursion 3 Nature
 Germany 3208078 Seul Antarctica 0 Beach Winter 26 4 5 
 Germany 4600327 Zavolzhye Asia 1 Sport Climb 777231 
 Belarus 1350093 London Oceania 0 Excursion 70 Nature 
-Belarus 4461932 Chelyabinsk Africa 0 Excursion 73 Nature 
-Australia 8626346 Odessa Antarctica 1 Beach Summer -16 26 77 
+Belarus 1 Chelyabinsk Africa 0 Excursion 73 Nature
+Australia 1 Odessa Antarctica 1 Beach Summer -16 26 77

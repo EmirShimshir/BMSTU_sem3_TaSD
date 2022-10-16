@@ -96,6 +96,12 @@ void print_rules_add(void)
            "\n");
 }
 
+void print_rules_del(void)
+{
+    printf("\n"
+           "Enter the people count of country, that you want to delete: ");
+}
+
 void print_line(void)
 {
     printf("|---|---------------|---------------|---------------|---------------|---------------|---------------|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|%s---------------%s|\n",

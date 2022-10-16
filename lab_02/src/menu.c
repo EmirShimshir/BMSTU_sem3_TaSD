@@ -30,6 +30,29 @@ int check_key(int key, country_t *country_arr, country_key_t *key_arr, size_t *c
 
             break;
         }
+        case 3:
+        {
+            if (*count == 0)
+            {
+                printf("\nYou can't delete country, because table is empty.\n");
+                break;
+            }
+            print_rules_del();
+            size_t n = *count;
+            int count_people = 0;
+            if ((scanf("%d", &count_people) != 1) || (count_people < 1))
+            {
+                printf("\nError square of flat. Please write positive integer\n");
+                LOG_ERROR(ERR_READ_COUNT_PEOPLE);
+                return ERR_READ_COUNT_PEOPLE;
+            }
+            del_country(country_arr, count, count_people);
+            if (n == *count)
+                printf("No flats with this square.\n");
+            else
+                printf("Successfully deleted\n");
+            break;
+        }
 
 
         default:
