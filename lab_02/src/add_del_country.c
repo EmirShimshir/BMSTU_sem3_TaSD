@@ -210,14 +210,14 @@ void del_country(country_t *country_arr, size_t *count, int count_people)
     for(size_t i = 0; i < *count; i++)
     {
         if ((country_arr + i)->count_people == count_people) {
-            swap(country_arr, count, i);
+            move(country_arr, count, i);
             i--;
             (*count)--;
         }
     }
 }
 
-void swap(country_t *country_arr, size_t *count, size_t i)
+void move(country_t *country_arr, size_t *count, size_t i)
 {
     for(size_t j = i; j < *count - 1; j++)
     {
