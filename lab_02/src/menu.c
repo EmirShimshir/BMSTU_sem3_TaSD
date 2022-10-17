@@ -4,6 +4,9 @@
 #include "../inc/add_del_country.h"
 #include "../inc/defs.h"
 #include "../inc/find_countries.h"
+#include "../inc/sort_countries.h"
+#include "../inc/read.h"
+#include "../inc/compare.h"
 
 int check_key(int key, country_t *country_arr, country_key_t *key_arr, size_t *count)
 {
@@ -68,6 +71,49 @@ int check_key(int key, country_t *country_arr, country_key_t *key_arr, size_t *c
         case 5:
         {
             print_table_key(key_arr, *count);
+            break;
+        }
+        case 6:
+        {
+            sort_table_key(key_arr, *count);
+            print_table_key(key_arr, *count);
+            break;
+        }
+        case 7:
+        {
+            qsort_table_key(key_arr, *count);
+            print_table_key(key_arr, *count);
+            break;
+        }
+        case 8:
+        {
+            sort_table(country_arr, *count);
+            print_table(country_arr, *count);
+            read_table_key(country_arr, key_arr, *count);
+            break;
+        }
+        case 9:
+        {
+            qsort_table(country_arr, *count);
+            print_table(country_arr, *count);
+            read_table_key(country_arr, key_arr, *count);
+            break;
+        }
+        case 10:
+        {
+            sort_table_key(key_arr, *count);
+            print_sort_table_by_key(country_arr, *count, key_arr);
+            break;
+        }
+        case 11:
+        {
+            qsort_table_key(key_arr, *count);
+            print_sort_table_by_key(country_arr, *count, key_arr);
+            break;
+        }
+        case 12:
+        {
+            compare_sort(country_arr, *count, key_arr);
             break;
         }
         default:

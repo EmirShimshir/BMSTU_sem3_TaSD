@@ -222,7 +222,6 @@ void swap(country_t *country_a, country_t *country_b)
     memcpy(&temp_country, country_a, sizeof(country_t));
     memcpy(country_a, country_b, sizeof(country_t));
     memcpy(country_b, &temp_country, sizeof(country_t));
-
 }
 
 void move(country_t *country_arr, size_t *count, size_t i)
