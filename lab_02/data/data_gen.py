@@ -21,8 +21,8 @@ sport_type = ("Skiing", "Surfing", "Climb")
 
 # Страна Население Столица Материк ПЦР Вид туризма ... ... ... ...
 
-file = open("countries_10000.txt", "w")
-for i in range(10000):
+file = open("countries_200.txt", "w")
+for i in range(200):
     file.write(country[randint(0, 10)])
     file.write(' ')
     file.write(str(randint(1000, 10000000)))  # Население
