@@ -3,6 +3,7 @@
 #include "../inc/print.h"
 #include "../inc/defs.h"
 
+
 void print_table(country_t *country, size_t count)
 {
     print_table_head();
@@ -99,7 +100,16 @@ void print_rules_add(void)
 void print_rules_del(void)
 {
     printf("\n"
-           "Enter the people count of country, that you want to delete: ");
+           "Enter the people count (positive integer number) of country, that you want to delete: ");
+}
+
+void print_rules_find(void)
+{
+    printf("\n"
+           "The country, capital, mainland, excursion type, beach season and sport type should be written in one word and max len is 15 symbols.\n"
+           "Other parameters of country are integer numbers.\n"
+           "Please enter them without spaces and letters.\n"
+           "\n");
 }
 
 void print_line(void)

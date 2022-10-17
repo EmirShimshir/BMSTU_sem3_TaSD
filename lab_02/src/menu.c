@@ -38,7 +38,7 @@ int check_key(int key, country_t *country_arr, country_key_t *key_arr, size_t *c
         {
             if (*count == 0)
             {
-                printf("\nYou can't delete country, because table is empty.\n");
+                printf("\nYou can't delete country, because table is empty\n");
                 break;
             }
             print_rules_del();
@@ -59,6 +59,7 @@ int check_key(int key, country_t *country_arr, country_key_t *key_arr, size_t *c
         }
         case 4:
         {
+            print_rules_find();
             err = find_countries(country_arr, *count);
             if (err != EXIT_SUCCESS)
             {
