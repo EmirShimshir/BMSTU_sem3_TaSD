@@ -74,7 +74,7 @@ void print_menu(void)
            "1 - Show country table\n"
            "2 - Add country\n"
            "3 - Delete country\n"
-           "4 - Show all secondary flat with 2 rooms and animals !!change!!\n"
+           "4 - Show all countries on chosen mainland with chosen sport activity type\n"
            "5 - Show table key by square\n"
            "6 - Show sort table key by square (bubble sort)\n"
            "7 - Show sort table key by square (quick sort)\n"
