@@ -65,6 +65,11 @@ int check_key(int key, country_t *country_arr, country_key_t *key_arr, size_t *c
 
             break;
         }
+        case 5:
+        {
+            print_table_key(key_arr, *count);
+            break;
+        }
         default:
         {
             err = ERR_KEY;

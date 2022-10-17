@@ -13,6 +13,6 @@ void print_info(void);
 void print_menu(void);
 void print_rules_add(void);
 void print_rules_del(void);
-
+void print_table_key(country_key_t *key_arr, size_t count);
 
 #endif // __PRINT_H__

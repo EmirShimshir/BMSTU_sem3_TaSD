@@ -116,3 +116,17 @@ void print_table_head(void)
     );
     print_line();
 }
+
+void print_table_key(country_key_t *key_arr, size_t count)
+{
+    printf("|---|---------------|---------------|\n"
+           "| № |     index     |  people count |\n"
+           "|---|---------------|---------------|\n");
+    for(size_t i = 0; i < count; i++)
+    {
+        printf("|%*zu|", 3, i + 1);
+        printf("%*d|", 15, (key_arr + i)->index);
+        printf("%*d|\n", 15, (key_arr + i)->count_people);
+        printf("|---|---------------|---------------|\n");
+    }
+}
