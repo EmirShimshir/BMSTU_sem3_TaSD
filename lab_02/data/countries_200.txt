@@ -1,0 +1,200 @@
+Japan 6505786 Humburg Oceania 0 Excursion 46 Art 
+China 8937030 Sochi North_America 1 Excursion 28 Art 
+China 7057612 Chelyabinsk Antarctica 1 Beach Winter -3 15 420 
+China 3302311 Minsk North_America 1 Beach Autumn 5 17 287 
+Georgia 2572435 Humburg Africa 0 Excursion 51 Art 
+Germany 3615335 Honkong Asia 0 Excursion 1 History 
+Georgia 2514793 Minsk Africa 0 Excursion 82 Art 
+Britain 8068075 Zavolzhye South_America 1 Sport Surfing 862044 
+Ukraine 5498423 Humburg Europe 0 Excursion 88 History 
+Georgia 8076811 Honkong Asia 1 Excursion 9 History 
+Ukraine 8453798 Colorado North_America 0 Sport Skiing 625332 
+Britain 4778441 Minsk Europe 1 Beach Spring -20 1 536 
+Ukraine 5265090 Seul Antarctica 1 Beach Autumn 16 12 536 
+Bulgary 2242657 Chelyabinsk North_America 0 Sport Skiing 315699 
+Georgia 5344481 Belgorod Antarctica 1 Excursion 81 History 
+Russia 956413 Minsk Africa 0 Excursion 52 Nature 
+Britain 4331764 Seul Antarctica 1 Sport Climb 659843 
+Russia 5214503 Belgorod Africa 0 Sport Surfing 857248 
+Belarus 9389148 Belgorod Oceania 0 Sport Climb 372633 
+Georgia 120161 Sochi Antarctica 1 Excursion 10 Art 
+Japan 4578450 Seul Oceania 0 Excursion 100 History 
+Britain 9562153 Sochi South_America 1 Excursion 78 Nature 
+Ukraine 1811165 Belgorod South_America 0 Excursion 27 Nature 
+USA 5755356 Seul Antarctica 1 Sport Climb 189831 
+Belarus 6066414 Belgorod Antarctica 1 Sport Skiing 617988 
+Britain 7419062 Odessa Asia 1 Excursion 92 History 
+Belarus 8296184 Humburg Antarctica 0 Sport Skiing 203777 
+Russia 5959 Odessa Oceania 0 Beach Winter 38 30 352 
+Australia 4341310 London North_America 1 Sport Surfing 633249 
+Belarus 7593073 London Asia 0 Beach Spring 39 1 21 
+Japan 3224084 Honkong Antarctica 0 Sport Climb 121029 
+Ukraine 6331847 Colorado North_America 1 Sport Surfing 933662 
+Georgia 6650856 Minsk Asia 0 Sport Surfing 360903 
+Britain 1660276 Belgorod Oceania 1 Sport Skiing 234588 
+Britain 6300865 Zavolzhye North_America 1 Excursion 20 Art 
+Ukraine 8003074 Humburg Asia 0 Beach Spring -29 13 363 
+Germany 4118586 Colorado Oceania 1 Beach Autumn -8 17 528 
+Australia 1669678 Odessa South_America 1 Sport Skiing 323355 
+China 165974 Colorado Antarctica 1 Sport Surfing 721911 
+Bulgary 1173275 Chelyabinsk Asia 1 Excursion 62 Nature 
+China 1103619 Humburg South_America 1 Excursion 67 Art 
+Ukraine 5871309 Seul Africa 0 Excursion 39 Nature 
+Britain 8698965 London Asia 1 Excursion 43 Nature 
+China 7524907 Belgorod Antarctica 0 Excursion 14 History 
+Bulgary 8254457 Moscow North_America 1 Excursion 39 Nature 
+Belarus 4000909 Honkong North_America 0 Sport Surfing 651732 
+Australia 3598888 Seul Antarctica 0 Sport Surfing 303688 
+Russia 7380622 Humburg Africa 0 Excursion 35 Nature 
+Japan 5594668 Chelyabinsk Antarctica 0 Excursion 100 Nature 
+Britain 1756010 Colorado Oceania 1 Beach Spring 28 26 366 
+Belarus 9249398 Sochi South_America 1 Sport Surfing 999624 
+Japan 1131523 Zavolzhye Africa 1 Excursion 30 Nature 
+USA 7849491 Belgorod Antarctica 1 Sport Climb 290025 
+Georgia 3010440 Sochi South_America 0 Sport Skiing 987714 
+Georgia 8973273 Honkong South_America 0 Sport Climb 641821 
+Japan 1294211 Humburg Africa 0 Beach Summer -27 13 449 
+Britain 1764241 Colorado North_America 1 Beach Autumn 37 20 439 
+Japan 6690566 Zavolzhye South_America 0 Sport Skiing 337550 
+Japan 5990643 Chelyabinsk Africa 1 Sport Climb 607313 
+Georgia 5229485 London Africa 1 Excursion 38 History 
+USA 8292162 Belgorod Antarctica 1 Beach Autumn -24 3 303 
+USA 4868275 Moscow Oceania 1 Beach Winter 18 27 659 
+Georgia 2240951 Zavolzhye Asia 0 Sport Surfing 772554 
+China 6982130 Seul North_America 1 Beach Summer 5 7 107 
+Britain 4664181 Colorado North_America 0 Sport Climb 425145 
+Ukraine 9518253 Belgorod South_America 1 Sport Climb 923222 
+China 8303444 London Africa 1 Excursion 6 Art 
+Japan 6106859 Minsk Oceania 0 Beach Autumn 7 10 362 
+Germany 9591441 Odessa Oceania 1 Excursion 20 History 
+China 3281911 Minsk Europe 0 Excursion 23 Nature 
+Australia 1439818 Honkong Asia 1 Sport Skiing 907097 
+USA 7311164 Minsk North_America 0 Sport Skiing 280647 
+Georgia 7873666 Moscow Africa 0 Sport Climb 449732 
+Georgia 5669991 Seul South_America 0 Excursion 96 Nature 
+Australia 9254768 Moscow Antarctica 0 Excursion 43 History 
+Belarus 7380788 Moscow Oceania 0 Beach Spring -3 6 548 
+Germany 1027800 Sochi Africa 0 Beach Winter 34 15 60 
+Bulgary 7632857 Odessa Europe 1 Sport Skiing 805512 
+Japan 9263683 Colorado North_America 0 Beach Spring -6 0 248 
+Georgia 6445702 Seul Africa 0 Excursion 26 Art 
+Bulgary 597107 London North_America 0 Excursion 55 Art 
+USA 9802099 Minsk North_America 0 Sport Surfing 945166 
+Japan 8667303 Zavolzhye Europe 0 Beach Summer 39 23 432 
+China 1639328 Odessa North_America 1 Beach Winter 11 12 676 
+USA 2265889 Zavolzhye Asia 0 Excursion 33 History 
+Bulgary 597708 Odessa Europe 1 Beach Summer -17 3 451 
+Russia 4576210 Seul Antarctica 1 Sport Climb 23641 
+Japan 553024 Seul South_America 1 Sport Skiing 376758 
+Australia 2463836 Odessa Asia 0 Beach Spring 1 13 689 
+Russia 6190498 Minsk Europe 1 Excursion 1 Art 
+Australia 2610742 Honkong Oceania 1 Beach Winter 8 6 410 
+Japan 7913526 Belgorod Africa 0 Sport Surfing 939937 
+USA 244567 Zavolzhye Oceania 0 Sport Climb 667373 
+Bulgary 2567584 Seul South_America 0 Beach Autumn 26 7 634 
+Britain 3777705 Chelyabinsk South_America 1 Beach Winter -15 2 422 
+Japan 9857777 Humburg North_America 0 Sport Skiing 449309 
+Japan 9562104 Colorado Antarctica 1 Excursion 96 Nature 
+Britain 3494105 Zavolzhye Europe 0 Beach Winter -26 15 445 
+Russia 3520806 London Oceania 1 Sport Climb 6557 
+Britain 8242343 Honkong North_America 1 Sport Climb 684445 
+Germany 3978188 Colorado Oceania 1 Excursion 89 History 
+USA 7414508 Colorado Europe 1 Beach Spring 17 24 379 
+Bulgary 6177116 Seul Africa 0 Excursion 9 Art 
+Belarus 2020186 Minsk North_America 1 Excursion 10 Nature 
+Britain 1489202 Chelyabinsk Asia 0 Sport Climb 260973 
+USA 9551776 Colorado Europe 0 Beach Winter 38 2 125 
+Georgia 2187224 London North_America 0 Sport Climb 168126 
+Japan 7629450 Colorado Africa 1 Beach Winter -27 21 223 
+Russia 936935 Odessa Oceania 0 Sport Climb 36646 
+Australia 6034336 Odessa Oceania 1 Beach Summer -6 17 166 
+Germany 1485190 Chelyabinsk Asia 0 Sport Skiing 541371 
+Russia 801250 Zavolzhye Antarctica 0 Excursion 15 Art 
+Australia 9149996 Honkong Europe 1 Excursion 79 Art 
+Georgia 6616818 Honkong South_America 1 Excursion 33 Art 
+Russia 7404856 Moscow Antarctica 1 Sport Surfing 702406 
+China 6456433 Zavolzhye Africa 1 Excursion 39 Nature 
+Bulgary 3708533 Humburg Asia 1 Sport Surfing 742260 
+Russia 7102256 Seul Oceania 0 Excursion 15 Nature 
+China 5833834 Minsk Antarctica 1 Beach Winter -1 8 6 
+Georgia 1239274 Belgorod Africa 1 Beach Winter 17 22 440 
+USA 9105591 Honkong Asia 0 Excursion 47 Nature 
+Belarus 1628214 London South_America 1 Sport Surfing 916242 
+Russia 7027885 Humburg Europe 1 Sport Surfing 214311 
+Ukraine 5233472 Colorado Africa 1 Sport Surfing 334866 
+Belarus 7482892 Zavolzhye Africa 0 Beach Summer -26 3 383 
+Britain 4061909 Belgorod Europe 1 Sport Climb 297710 
+China 1458704 Moscow North_America 0 Excursion 12 History 
+Japan 2132664 Zavolzhye South_America 0 Sport Surfing 323102 
+USA 7174679 Moscow Oceania 0 Sport Skiing 930868 
+China 9370427 Sochi Asia 1 Excursion 38 Art 
+Ukraine 9854016 Zavolzhye Europe 0 Excursion 42 Nature 
+Bulgary 7624428 Honkong Antarctica 1 Sport Climb 765917 
+Australia 6878896 Moscow Oceania 1 Sport Climb 947653 
+USA 2468270 Sochi South_America 0 Sport Surfing 385367 
+Australia 4951623 Zavolzhye Asia 0 Excursion 58 Nature 
+Australia 3314327 London Europe 1 Excursion 63 Art 
+Australia 258659 Minsk Antarctica 0 Beach Autumn -14 19 94 
+Germany 402993 Sochi Europe 0 Excursion 35 Art 
+Belarus 2876073 Moscow South_America 0 Excursion 55 Nature 
+Japan 1776355 Minsk Antarctica 0 Sport Skiing 220053 
+Australia 8401986 Belgorod North_America 0 Excursion 10 Art 
+Belarus 4095752 Humburg Oceania 0 Sport Skiing 852575 
+USA 6187548 Minsk Europe 0 Beach Autumn 4 19 328 
+Russia 6943296 Honkong Antarctica 1 Beach Spring 39 28 86 
+Australia 3806681 Moscow Africa 0 Beach Winter 38 11 456 
+Australia 2897562 Moscow Africa 1 Beach Spring 17 9 250 
+Germany 5302586 Moscow Oceania 1 Sport Climb 486340 
+Britain 747845 London Antarctica 1 Sport Skiing 709478 
+Britain 5412444 Minsk Africa 1 Excursion 96 History 
+Russia 5676417 Humburg Oceania 0 Excursion 87 Art 
+Russia 2977464 Minsk Asia 1 Beach Autumn -29 15 491 
+Germany 8161161 Zavolzhye Africa 1 Excursion 54 Art 
+Georgia 1655503 Zavolzhye Asia 1 Excursion 15 Art 
+Britain 2458073 Odessa Africa 1 Beach Spring 1 6 264 
+Russia 797487 Colorado Africa 1 Excursion 80 Nature 
+Germany 6591213 Honkong Antarctica 0 Beach Autumn -17 23 668 
+USA 691278 Sochi North_America 1 Excursion 61 Nature 
+USA 8348320 Chelyabinsk Europe 0 Excursion 33 Art 
+Belarus 9978364 Honkong Asia 1 Sport Climb 700588 
+China 2992076 Moscow Africa 0 Beach Summer -12 29 264 
+Australia 7351243 Sochi Asia 1 Beach Spring -24 9 434 
+Russia 9061904 Minsk Europe 0 Beach Winter 40 14 453 
+Bulgary 4171408 Belgorod South_America 0 Beach Winter 3 14 683 
+Japan 5174029 Colorado North_America 0 Sport Climb 985667 
+Germany 8355414 Moscow Europe 0 Excursion 98 Nature 
+Georgia 6483177 Chelyabinsk Oceania 0 Beach Summer 5 11 398 
+Belarus 9747872 Moscow Antarctica 1 Excursion 91 History 
+Ukraine 8869593 Belgorod South_America 1 Excursion 88 Nature 
+Belarus 328146 Belgorod Oceania 0 Beach Spring 7 23 404 
+USA 2436391 Zavolzhye Europe 1 Excursion 28 History 
+Russia 3294300 Moscow Europe 0 Beach Spring -8 7 619 
+Bulgary 8648497 London Africa 1 Beach Spring 1 21 428 
+Georgia 8854127 Odessa South_America 0 Excursion 84 Nature 
+USA 8276920 Zavolzhye Africa 1 Excursion 42 Nature 
+Japan 6001512 Zavolzhye Antarctica 0 Excursion 73 Art 
+Russia 4224171 Belgorod South_America 1 Beach Summer 14 6 389 
+Japan 3987339 Honkong South_America 0 Sport Skiing 765481 
+Australia 3102290 Sochi Asia 0 Sport Surfing 827688 
+Japan 3632492 Moscow North_America 1 Excursion 56 History 
+Bulgary 547898 Humburg Europe 1 Beach Autumn -1 7 607 
+China 2924593 Zavolzhye Asia 0 Excursion 10 Nature 
+Georgia 3389027 London Asia 1 Excursion 81 History 
+Russia 4611215 Chelyabinsk Europe 0 Sport Climb 236168 
+Australia 1331279 Belgorod North_America 0 Excursion 15 History 
+Britain 5778037 Seul Antarctica 0 Excursion 84 History 
+Georgia 6529459 Minsk Africa 1 Beach Autumn 18 21 269 
+Georgia 6044855 Honkong North_America 1 Excursion 90 History 
+Ukraine 1629110 Colorado Asia 1 Sport Climb 498331 
+Georgia 4116534 Odessa North_America 1 Beach Winter 12 7 158 
+Ukraine 4793232 Zavolzhye Oceania 0 Sport Climb 357072 
+Britain 5924332 London Asia 1 Excursion 2 History 
+Britain 7668181 Humburg North_America 1 Sport Skiing 937146 
+Australia 6684169 Colorado Antarctica 1 Beach Spring 32 7 365 
+Georgia 8610146 Moscow Europe 0 Beach Autumn 17 8 519 
+Belarus 7471843 Honkong Asia 1 Beach Summer 33 18 54 
+Georgia 575105 London Europe 0 Excursion 18 Nature 
+Ukraine 5053789 Sochi North_America 0 Beach Winter -8 22 718 
+Russia 3721759 Zavolzhye Africa 0 Beach Autumn -5 9 402 
+Germany 8598799 Colorado Antarctica 1 Excursion 81 Nature 
+Russia 4824156 Colorado Oceania 0 Excursion 87 Nature 
