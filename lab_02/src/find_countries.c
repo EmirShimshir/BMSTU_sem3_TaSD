@@ -8,19 +8,19 @@
 
 int find_countries(country_t *country_arr, size_t count)
 {
-    char mainland[MAX_FIELD];
+    char mainland[MAX_FIELD + 2];
     printf("Enter the mainland: ");
     getchar();
-    if ((fgets(mainland, MAX_FIELD + 1, stdin) == NULL) || trim(mainland))
+    if ((fgets(mainland, MAX_FIELD + 2, stdin) == NULL) || trim(mainland))
     {
         printf("Error mainland. Please try again according the rules\n");
         LOG_ERROR(ERR_READ_MAINLAND);
         return ERR_READ_MAINLAND;
     }
 
-    char sport_type[MAX_FIELD];
+    char sport_type[MAX_FIELD + 2];
     printf("Enter sport type: ");
-    if ((fgets(sport_type, MAX_FIELD + 1, stdin) == NULL) || trim(sport_type))
+    if ((fgets(sport_type, MAX_FIELD + 2, stdin) == NULL) || trim(sport_type))
     {
         printf("Error sport type. Please try again according the rules\n");
         LOG_ERROR(ERR_READ_SPORT_TYPE);

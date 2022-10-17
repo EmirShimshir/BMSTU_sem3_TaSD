@@ -12,13 +12,13 @@ typedef enum tourism
 
 typedef struct
 {
-    char excursion_type[MAX_FIELD];
+    char excursion_type[MAX_FIELD + 2];
     int count_objects;
 } excursion_t;
 
 typedef struct
 {
-    char beach_type[MAX_FIELD];
+    char beach_type[MAX_FIELD + 2];
     int temperature_air;
     int temperature_water;
     int time_flight;
@@ -26,7 +26,7 @@ typedef struct
 
 typedef struct
 {
-    char sport_type[MAX_FIELD];
+    char sport_type[MAX_FIELD + 2];
     int price_min;
 } sport_t;
 
@@ -40,9 +40,9 @@ typedef union
 
 typedef struct
 {
-    char country[MAX_FIELD];
-    char capital[MAX_FIELD];
-    char mainland[MAX_FIELD];
+    char country[MAX_FIELD + 2];
+    char capital[MAX_FIELD + 2];
+    char mainland[MAX_FIELD + 2];
     int count_people;
     int need_PCR;
     tourism_t tourism;

@@ -1,11 +1,11 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 #include "../inc/add_del_country.h"
 #include "../inc/read.h"
 #include "../inc/debug.h"
 #include "../inc/defs.h"
-#include <string.h>
-#include <ctype.h>
 
 int trim(char *s)
 {
@@ -25,7 +25,7 @@ int read_country_stdin(country_t *country)
 {
     getchar();
     printf("Enter the country: ");
-    if ((fgets(country->country, MAX_FIELD + 1, stdin) == NULL) || (trim(country->country)))
+    if ((fgets(country->country, MAX_FIELD + 2, stdin) == NULL) || (trim(country->country)))
     {
         printf("Error country. Please try again according the rules\n");
         LOG_ERROR(ERR_READ_COUNTRY);
@@ -44,7 +44,7 @@ int read_country_stdin(country_t *country)
 
     getchar();
     printf("Enter the capital: ");
-    if ((fgets(country->capital, MAX_FIELD + 1, stdin) == NULL) || (trim(country->capital)))
+    if ((fgets(country->capital, MAX_FIELD + 2, stdin) == NULL) || (trim(country->capital)))
     {
         printf("Error capital. Please try again according the rules\n");
         LOG_ERROR(ERR_READ_CAPITAL);
@@ -53,7 +53,7 @@ int read_country_stdin(country_t *country)
     LOG_DEBUG("read capital == %s", country->capital);
 
     printf("Enter the mainland: ");
-    if ((fgets(country->mainland, MAX_FIELD + 1, stdin) == NULL) || trim(country->mainland))
+    if ((fgets(country->mainland, MAX_FIELD + 2, stdin) == NULL) || trim(country->mainland))
     {
         printf("Error mainland. Please try again according the rules\n");
         LOG_ERROR(ERR_READ_MAINLAND);
@@ -71,9 +71,9 @@ int read_country_stdin(country_t *country)
     LOG_DEBUG("read need PCR == %d", country->need_PCR);
 
     getchar();
-    char temp_tourism[MAX_FIELD];
+    char temp_tourism[MAX_FIELD + 2];
     printf("Enter tourism (Excursion/Beach/Sport): ");
-    if ((fgets(temp_tourism, MAX_FIELD + 1, stdin) == NULL) || trim(temp_tourism))
+    if ((fgets(temp_tourism, MAX_FIELD + 2, stdin) == NULL) || trim(temp_tourism))
     {
         printf("Error tourism. Please try again according the rules\n");
         LOG_ERROR(ERR_READ_TOURISM);
@@ -179,7 +179,6 @@ int read_country_stdin(country_t *country)
     return EXIT_SUCCESS;
 }
 
-
 int add_country(country_t *country_arr, country_key_t *key_arr, size_t *count)
 {
     LOG_INFO("started");
@@ -225,9 +224,9 @@ void swap(country_t *country_a, country_t *country_b)
     memcpy(country_b, &temp_country, sizeof(country_t));
 
 }
+
 void move(country_t *country_arr, size_t *count, size_t i)
 {
     for(size_t j = i; j < *count - 1; j++)
         swap(country_arr + j, country_arr + j + 1);
-
 }
