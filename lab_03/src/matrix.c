@@ -5,66 +5,78 @@
 #include "../inc/log.h"
 #include "../inc/errors.h"
 
-void destroy_matrix(matrix_t matrix)
+void free_matrix(int **matrix, int rows)
 {
-    LOG_INFO("start");
-    if (matrix != NULL)
-    {
-        free(matrix->matrix[0]);
-        free(matrix->matrix);
-        free(matrix);
-        matrix = NULL;
-    }
-
+    LOG_INFO("started");
+    for (int i = 0; i < rows; i++)
+        free(matrix[i]);
+    free(matrix);
     LOG_INFO("finish successfully");
 }
 
-matrix_t create_matrix(int row, int column, non_zero)
+int **allocate_matrix(int rows, int columns)
 {
-    LOG_INFO("start");
-
-    matrix_t matrix = malloc(sizeof(struct matrix_type));
+    LOG_INFO("started");
+    int **matrix = malloc(rows * sizeof(int*));
     if (matrix == NULL)
     {
-        LOG_DEBUG("error malloc(sizeof(struct matrix_type))");
+        LOG_DEBUG("%s", "error malloc(n * sizeof(int*))");
         return NULL;
     }
-    printf("%lu\n", sizeof(*matrix));
 
-    matrix->row = row;
-    matrix->column = column;
-
-    matrix->matrix = malloc(matrix->row *sizeof(*matrix->matrix));
-    if (matrix->matrix == NULL)
+    for (int i = 0; i < rows; i++)
     {
-        LOG_DEBUG("error malloc(matrix->row, sizeof(*matrix->matrix))");
-        free(matrix);
-        return NULL;
+        matrix[i] = calloc(columns, sizeof(int));
+        if (matrix[i] == NULL)
+        {
+            free_matrix(matrix, i);
+            LOG_DEBUG("%s", "error calloc(columns, sizeof(int))");
+            return NULL;
+        }
     }
-    printf("%lu\n", sizeof(*matrix->matrix));
-
-    int *data = malloc(matrix->row * matrix->column * sizeof(**matrix->matrix));
-    if (data == NULL)
-    {
-        LOG_DEBUG("error malloc(matrix->row * matrix->column * sizeof(**matrix->matrix))");
-        free(matrix->matrix);
-        free(matrix);
-        return NULL;
-    }
-
-    for (int i = 0; i < matrix->row; i++)
-        matrix->matrix[i] = data + i * matrix->column;
-
     LOG_INFO("finish successfully");
     return matrix;
 }
 
-void matrix_print(matrix_t matrix)
+int init_matrix_t(matrix_t *matrix, int rows, int columns, int non_zero)
 {
     LOG_INFO("started");
-    for (int i = 0; i < matrix->row; i++)
+    int err = EXIT_SUCCESS;
+
+    matrix->rows = rows;
+    matrix->columns = columns;
+    matrix->non_zero = non_zero;
+
+    matrix->matrix = allocate_matrix(rows, columns);
+
+    if (matrix->matrix == NULL)
     {
-        for (int j = 0; j < matrix->column; j++)
+        LOG_ERROR(ERR_MEM_ALLOC);
+        err = ERR_MEM_ALLOC;
+        return err;
+    }
+
+    LOG_INFO("finish successfully");
+    return err;
+}
+
+void free_matrix_t(matrix_t *matrix)
+{
+    LOG_INFO("started");
+    free_matrix(matrix->matrix, matrix->rows);
+    matrix->matrix = NULL;
+    matrix->rows = 0;
+    matrix->columns = 0;
+    matrix->non_zero = 0;
+    LOG_INFO("finish successfully");
+}
+
+void print_matrix_t(matrix_t *matrix)
+{
+    LOG_INFO("started");
+    for (int i = 0; i < matrix->rows; i++)
+    {
+        for (int j = 0; j < matrix->columns; j++)
         {
             printf("%d ", matrix->matrix[i][j]);
         }
@@ -72,4 +84,3 @@ void matrix_print(matrix_t matrix)
     }
     LOG_INFO("finish successfully");
 }
-

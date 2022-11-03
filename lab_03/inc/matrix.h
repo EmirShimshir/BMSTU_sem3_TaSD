@@ -2,7 +2,7 @@
 
 #define __MATRIX_H__
 
-typedef struct matrix_t
+typedef struct
 {
     int rows;
     int columns;
@@ -11,8 +11,10 @@ typedef struct matrix_t
     int **matrix;
 } matrix_t;
 
-void destroy(matrix_t matrix);
-matrix_t create(int row, int column);
-void matrix_print(matrix_t matrix);
+void free_matrix(int **matrix, int rows);
+int **allocate_matrix(int rows, int columns);
+int init_matrix_t(matrix_t *matrix, int rows, int columns, int non_zero);
+void free_matrix_t(matrix_t *matrix);
+void print_matrix_t(matrix_t *matrix);
 
 #endif // __MATRIX_H__
