@@ -6,11 +6,20 @@
 #include "sparse_matrix.h"
 
 
-//int generate_matrix(matrix_t *matrix, sparse_matrix_t *sparse_matrix);
+int generate_matrix(matrix_t *matrix, sparse_matrix_t *sparse_matrix);
+void generate_matrix_t(matrix_t *matrix);
+
 int print_matrix(matrix_t *matrix, sparse_matrix_t *sparse_matrix);
 
 int read_matrix(matrix_t *matrix, sparse_matrix_t *sparse_matrix);
 int read_matrix_t(matrix_t *matrix);
 void fill_sparse_matrix_t_by_matrix_t(sparse_matrix_t *sparse_matrix, matrix_t *matrix);
+
+int addition_matrix_t(matrix_t *matrix_1, matrix_t *matrix_2);
+int count_non_zero(matrix_t *matrix_1, matrix_t *matrix_2);
+void addition(matrix_t *matrix_1, matrix_t *matrix_2, matrix_t *matrix_res);
+
+int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2);
+int count_non_zero_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2);
 
 #endif // __ACTIONS_H__
