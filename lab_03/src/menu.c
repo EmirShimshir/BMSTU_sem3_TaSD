@@ -33,7 +33,7 @@ int choose_action(int *action)
 
     printf("Выберете пункт меню: ");
 
-    if(scanf("%d", action) != 1)
+    if (scanf("%d", action) != 1)
     {
         err = ERR_ACTION;
         LOG_ERROR(err);
@@ -115,13 +115,13 @@ int do_action(int action, sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *spa
                 LOG_ERROR(err);
             }
             break;
-//        case 8:
-//            err = addition_sparse_matrix_t(matrix_1, matrix_2);
-//            if (err != EXIT_SUCCESS)
-//            {
-//                LOG_ERROR(err);
-//            }
-//            break;
+        case 8:
+            err = addition_sparse_matrix_t(sparse_matrix_1, sparse_matrix_2);
+            if (err != EXIT_SUCCESS)
+            {
+                LOG_ERROR(err);
+            }
+            break;
         default:
             free_sparse_matrix_t(sparse_matrix_1);
             free_sparse_matrix_t(sparse_matrix_2);

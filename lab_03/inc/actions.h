@@ -20,6 +20,6 @@ int count_non_zero(matrix_t *matrix_1, matrix_t *matrix_2);
 void addition(matrix_t *matrix_1, matrix_t *matrix_2, matrix_t *matrix_res);
 
 int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2);
-int count_non_zero_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2);
+void addition_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2, sparse_matrix_t *sparse_matrix_res);
 
 #endif // __ACTIONS_H__

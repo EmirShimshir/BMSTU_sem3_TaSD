@@ -6,13 +6,11 @@
 
 #include <stdio.h>
 
-
-
 int main(void)
 {
     LOG_INFO("started");
     int err = EXIT_SUCCESS;
-    int action;
+    int action = 0;
 
     printf("Программа для сложения разряженных матриц\n"
            "Шимшир Эмирджан ИУ7-33Б В-24\n"

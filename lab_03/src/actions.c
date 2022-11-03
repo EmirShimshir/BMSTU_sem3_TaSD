@@ -350,11 +350,88 @@ int addition_matrix_t(matrix_t *matrix_1, matrix_t *matrix_2)
     print_matrix_t(&matrix_res);
     print_sparse_matrix_t(&sparse_matrix_res);
 
-    free_sparse_matrix_t(sparse_matrix_res);
-    free_matrix_t(matrix_res);
+    free_sparse_matrix_t(&sparse_matrix_res);
+    free_matrix_t(&matrix_res);
 
     LOG_INFO("finish successfully");
     return err;
+}
+
+void addition_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2, sparse_matrix_t *sparse_matrix_res)
+{
+    LOG_INFO("started");
+
+    sparse_matrix_res->non_zero = 0;
+    sparse_matrix_res->IA[0] = 0;
+    for (int row = 0; row < sparse_matrix_1->rows; row++)
+    {
+        int i, j, count_row = 0;
+        for (i = sparse_matrix_1->IA[row], j = sparse_matrix_2->IA[row]; i < sparse_matrix_1->IA[row + 1] && j < sparse_matrix_2->IA[row + 1];)
+        {
+            LOG_DEBUG("sparse_matrix_1->IA[row]: %d", sparse_matrix_1->IA[row]);
+            LOG_DEBUG("sparse_matrix_1->IA[row + 1]: %d", sparse_matrix_1->IA[row + 1]);
+            LOG_DEBUG("sparse_matrix_2->IA[row]: %d", sparse_matrix_2->IA[row]);
+            LOG_DEBUG("sparse_matrix_2->IA[row + 1]: %d", sparse_matrix_2->IA[row + 1]);
+            LOG_DEBUG("i: %d", i);
+            LOG_DEBUG("j: %d", j);
+            LOG_DEBUG("sparse_matrix_1->JA[i]: %d", sparse_matrix_1->JA[i]);
+            LOG_DEBUG("sparse_matrix_1->A[i]: %d", sparse_matrix_1->A[i]);
+            LOG_DEBUG("sparse_matrix_2->JA[j]: %d", sparse_matrix_2->JA[j]);
+            LOG_DEBUG("sparse_matrix_2->A[j]: %d", sparse_matrix_2->A[j]);
+
+            if (sparse_matrix_1->JA[i] < sparse_matrix_2->JA[j])
+            {
+                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_1->A[i];
+                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_1->JA[i];
+                count_row++;
+                sparse_matrix_res->non_zero++;
+                i++;
+            }
+            else if (sparse_matrix_1->JA[i] > sparse_matrix_2->JA[j])
+            {
+                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_2->A[j];
+                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_2->JA[j];
+                count_row++;
+                sparse_matrix_res->non_zero++;
+                j++;
+            }
+            else
+            {
+                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_1->A[i] + sparse_matrix_2->A[j];
+                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_1->JA[i];
+                count_row++;
+                sparse_matrix_res->non_zero++;
+                i++;
+                j++;
+            }
+        }
+
+        if (j == sparse_matrix_2->IA[row + 1])
+        {
+            for (; i < sparse_matrix_1->IA[row + 1];)
+            {
+                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_1->A[i];
+                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_1->JA[i];
+                count_row++;
+                sparse_matrix_res->non_zero++;
+                i++;
+            }
+        }
+        else if (i == sparse_matrix_1->IA[row + 1])
+        {
+            for (; j < sparse_matrix_2->IA[row + 1];)
+            {
+                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_2->A[j];
+                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_2->JA[j];
+                count_row++;
+                sparse_matrix_res->non_zero++;
+                j++;
+            }
+        }
+        sparse_matrix_res->IA[row + 1] = count_row + sparse_matrix_res->IA[row];
+    }
+
+    LOG_INFO("finish successfully");
 }
 
 int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2)
@@ -376,7 +453,6 @@ int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *
         return err;
     }
 
-    matrix_t matrix_res;
     sparse_matrix_t sparse_matrix_res;
     int rows = sparse_matrix_1->rows;
     int columns = sparse_matrix_1->columns;
@@ -389,10 +465,9 @@ int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *
         return err;
     }
 
-    sparse_matrix_res.non_zero = 0
+    addition_sparse(sparse_matrix_1, sparse_matrix_2, &sparse_matrix_res);
 
-    addition(matrix_1, matrix_2, &matrix_res);
-
+    matrix_t matrix_res;
     err = init_matrix_t(&matrix_res, rows, columns, non_zero);
     if (err != EXIT_SUCCESS)
     {
@@ -400,14 +475,97 @@ int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *
         return err;
     }
 
-    fill_matrix_t_by_sparse_matrix_t(&sparse_matrix_res, &matrix_res);
+//    fill_matrix_t_by_sparse_matrix_t(&sparse_matrix_res, &matrix_res);
 
     print_matrix_t(&matrix_res);
     print_sparse_matrix_t(&sparse_matrix_res);
 
-    free_sparse_matrix_t(sparse_matrix_res);
-    free_matrix_t(matrix_res);
+    free_sparse_matrix_t(&sparse_matrix_res);
+    free_matrix_t(&matrix_res);
 
     LOG_INFO("finish successfully");
     return err;
 }
+
+//74 69 46 0 0 26 88
+//22 0 0 100 83 80 66
+//36 24 54 99 0 0 0
+//0 54 97 89 36 0 0
+//0 0 0 4 95 0 31
+//50 58 30 0 0 0 95
+//94 0 100 0 95 14 73
+//
+//A:  74 69 46 26 88 22 100 83 80 66 36 24 54 99 54 97 89 36 4 95 31 50 58 30 95 94 100 95 14 73
+//JA: 0 1 2 5 6 0 3 4 5 6 0 1 2 3 1 2 3 4 3 4 6 0 1 2 6 0 2 4 5 6
+//IA: 0 5 10 14 18 21 25 30
+//
+//0 0 0 0 16 43 19
+//67 85 69 0 39 96 2
+//95 0 12 24 26 0 0
+//73 0 0 53 90 48 0
+//12 69 0 51 36 0 0
+//0 99 0 91 0 0 0
+//14 86 39 27 62 54 73
+//
+//A:  16 43 19 67 85 69 39 96 2 95 12 24 26 73 53 90 48 12 69 51 36 99 91 14 86 39 27 62 54 73
+//JA: 4 5 6 0 1 2 4 5 6 0 2 3 4 0 3 4 5 0 1 3 4 1 3 0 1 2 3 4 5 6
+//IA: 0 3 9 13 17 21 23 30
+//
+//сумма в стандарте
+//74 69 46 0 16 69 107
+//89 85 69 100 122 176 68
+//131 24 66 123 26 0 0
+//73 54 97 142 126 48 0
+//12 69 0 55 131 0 31
+//50 157 30 91 0 0 95
+//108 86 139 27 157 68 146
+//
+//A:  74 69 46 16 69 107 89 85 69 100 122 176 68 131 24 66 123 26 73 54 97 142 126 48 12 69 55 131 31 50 157 30 91 95 108 86 139 27 157 68 146
+//JA: 0 1 2 4 5 6 0 1 2 3 4 5 6 0 1 2 3 4 0 1 2 3 4 5 0 1 3 4 6 0 1 2 3 6 0 1 2 3 4 5 6
+//IA: 0 6 13 18 24 29 34 41
+//
+//сумма в разряженной
+//
+//A:  74 69 46 16 69 107 89 85 69 100 122 176 68 131 24 66 123 26 73 73 54 97 142 126 48 12 12 69 55 131 31 50 157 30 91 95 108 86 139 27 157 68 146
+//JA: 0 1 2 4 5 6 0 1 2 3 4 5 6 0 1 2 3 4 0 0 1 2 3 4 5 0 0 1 3 4 6 0 1 2 3 6 0 1 2 3 4 5 6
+//IA: 0 6 13 19 26 31 36 43
+//
+//
+//
+//
+//
+//0 0 0 0 0
+//0 0 0 0 0
+//0 0 88 0 74
+//73 0 0 0 0
+//66 0 0 24 0
+//
+//A:  88 74 73 66 24
+//JA: 2 4 0 0 3
+//IA: 0 0 0 2 3 5
+//
+//0 0 4 100 0
+//0 0 0 0 0
+//0 0 0 0 0
+//0 36 30 0 0
+//0 0 0 0 58
+//
+//A:  4 100 36 30 58
+//JA: 2 3 1 2 4
+//IA: 0 2 2 2 4 5
+//
+//сумма в стандарте
+//
+//0 0 4 100 0
+//0 0 0 0 0
+//0 0 88 0 74
+//73 36 30 0 0
+//66 0 0 24 58
+//
+//A:  4 100 88 74 73 36 30 66 24 58
+//JA: 2 3 2 4 0 1 2 0 3 4
+//IA: 0 2 2 4 7 10
+//
+//A:  88 74 73 36 66 24 58
+//JA: 2 4 0 1 0 3 4
+//IA: 0 0 0 2 4 7

@@ -41,7 +41,7 @@ int main(const int argc, const char **argv)
     {
         print_menu();
 
-        if(scanf("%d", &key) != 1)
+        if (scanf("%d", &key) != 1)
         {
             err = ERR_KEY;
             printf("\nError key, please, try again according the rules\n");
