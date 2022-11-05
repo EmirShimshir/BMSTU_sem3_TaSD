@@ -8,5 +8,6 @@
 void print_menu(void);
 int choose_action(int *action);
 int do_action(int action, sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2, matrix_t *matrix_1, matrix_t *matrix_2);
+void print_error_message(int err);
 
 #endif // __MENU_H__

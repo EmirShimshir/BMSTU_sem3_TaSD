@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
 
 #include "../inc/actions.h"
 #include "../inc/log.h"
@@ -15,7 +17,7 @@ void generate_matrix_t(matrix_t *matrix)
         row = rand() % matrix->rows;
         column = rand() % matrix->columns;
         if (matrix->matrix[row][column] == 0)
-            matrix->matrix[row][column] = 1 + rand() % 100;
+            matrix->matrix[row][column] = 1 + rand() % 9;
         else
             i--;
     }
@@ -202,6 +204,13 @@ int print_matrix(matrix_t *matrix, sparse_matrix_t *sparse_matrix)
     LOG_INFO("started");
     int err = EXIT_SUCCESS;
 
+    if (sparse_matrix->A == NULL || matrix->matrix == NULL)
+    {
+        err = ERR_MATRIX_NOT_ALLOCATED;
+        LOG_ERROR(err);
+        return err;
+    }
+
     printf("Введите вид матрицы (0 - стандартный, 1 - разряженный): ");
 
     int print_method;
@@ -347,7 +356,10 @@ int addition_matrix_t(matrix_t *matrix_1, matrix_t *matrix_2)
 
     fill_sparse_matrix_t_by_matrix_t(&sparse_matrix_res, &matrix_res);
 
+    printf("Результат сложения неразряженных матриц\n");
+    printf("Результирующая матрица в стандартном виде:\n");
     print_matrix_t(&matrix_res);
+    printf("Результирующая матрица в разряженном виде:\n");
     print_sparse_matrix_t(&sparse_matrix_res);
 
     free_sparse_matrix_t(&sparse_matrix_res);
@@ -361,7 +373,7 @@ void addition_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_m
 {
     LOG_INFO("started");
 
-    sparse_matrix_res->non_zero = 0;
+    int non_zero = 0;
     sparse_matrix_res->IA[0] = 0;
     for (int row = 0; row < sparse_matrix_1->rows; row++)
     {
@@ -381,26 +393,26 @@ void addition_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_m
 
             if (sparse_matrix_1->JA[i] < sparse_matrix_2->JA[j])
             {
-                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_1->A[i];
-                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_1->JA[i];
+                sparse_matrix_res->A[non_zero] = sparse_matrix_1->A[i];
+                sparse_matrix_res->JA[non_zero] = sparse_matrix_1->JA[i];
                 count_row++;
-                sparse_matrix_res->non_zero++;
+                non_zero++;
                 i++;
             }
             else if (sparse_matrix_1->JA[i] > sparse_matrix_2->JA[j])
             {
-                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_2->A[j];
-                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_2->JA[j];
+                sparse_matrix_res->A[non_zero] = sparse_matrix_2->A[j];
+                sparse_matrix_res->JA[non_zero] = sparse_matrix_2->JA[j];
                 count_row++;
-                sparse_matrix_res->non_zero++;
+                non_zero++;
                 j++;
             }
             else
             {
-                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_1->A[i] + sparse_matrix_2->A[j];
-                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_1->JA[i];
+                sparse_matrix_res->A[non_zero] = sparse_matrix_1->A[i] + sparse_matrix_2->A[j];
+                sparse_matrix_res->JA[non_zero] = sparse_matrix_1->JA[i];
                 count_row++;
-                sparse_matrix_res->non_zero++;
+                non_zero++;
                 i++;
                 j++;
             }
@@ -410,10 +422,10 @@ void addition_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_m
         {
             for (; i < sparse_matrix_1->IA[row + 1];)
             {
-                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_1->A[i];
-                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_1->JA[i];
+                sparse_matrix_res->A[non_zero] = sparse_matrix_1->A[i];
+                sparse_matrix_res->JA[non_zero] = sparse_matrix_1->JA[i];
                 count_row++;
-                sparse_matrix_res->non_zero++;
+                non_zero++;
                 i++;
             }
         }
@@ -421,16 +433,93 @@ void addition_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_m
         {
             for (; j < sparse_matrix_2->IA[row + 1];)
             {
-                sparse_matrix_res->A[sparse_matrix_res->non_zero] = sparse_matrix_2->A[j];
-                sparse_matrix_res->JA[sparse_matrix_res->non_zero] = sparse_matrix_2->JA[j];
+                sparse_matrix_res->A[non_zero] = sparse_matrix_2->A[j];
+                sparse_matrix_res->JA[non_zero] = sparse_matrix_2->JA[j];
                 count_row++;
-                sparse_matrix_res->non_zero++;
+                non_zero++;
                 j++;
             }
         }
         sparse_matrix_res->IA[row + 1] = count_row + sparse_matrix_res->IA[row];
     }
 
+    LOG_DEBUG("sparse_matrix_res->non_zero: %d", sparse_matrix_res->non_zero);
+    LOG_DEBUG("non_zero: %d", non_zero);
+
+    LOG_INFO("finish successfully");
+}
+
+int count_non_zero_sparse(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2)
+{
+    LOG_INFO("started");
+    int non_zero = 0;
+
+    for (int row = 0; row < sparse_matrix_1->rows; row++)
+    {
+        int i, j;
+        for (i = sparse_matrix_1->IA[row], j = sparse_matrix_2->IA[row]; i < sparse_matrix_1->IA[row + 1] && j < sparse_matrix_2->IA[row + 1];)
+        {
+            LOG_DEBUG("sparse_matrix_1->IA[row]: %d", sparse_matrix_1->IA[row]);
+            LOG_DEBUG("sparse_matrix_1->IA[row + 1]: %d", sparse_matrix_1->IA[row + 1]);
+            LOG_DEBUG("sparse_matrix_2->IA[row]: %d", sparse_matrix_2->IA[row]);
+            LOG_DEBUG("sparse_matrix_2->IA[row + 1]: %d", sparse_matrix_2->IA[row + 1]);
+            LOG_DEBUG("i: %d", i);
+            LOG_DEBUG("j: %d", j);
+            LOG_DEBUG("sparse_matrix_1->JA[i]: %d", sparse_matrix_1->JA[i]);
+            LOG_DEBUG("sparse_matrix_1->A[i]: %d", sparse_matrix_1->A[i]);
+            LOG_DEBUG("sparse_matrix_2->JA[j]: %d", sparse_matrix_2->JA[j]);
+            LOG_DEBUG("sparse_matrix_2->A[j]: %d", sparse_matrix_2->A[j]);
+
+            if (sparse_matrix_1->JA[i] < sparse_matrix_2->JA[j])
+            {
+                non_zero++;
+                i++;
+            }
+            else if (sparse_matrix_1->JA[i] > sparse_matrix_2->JA[j])
+            {
+                non_zero++;
+                j++;
+            }
+            else
+            {
+                non_zero++;
+                i++;
+                j++;
+            }
+        }
+
+        if (j == sparse_matrix_2->IA[row + 1])
+        {
+            for (; i < sparse_matrix_1->IA[row + 1];)
+            {
+                non_zero++;
+                i++;
+            }
+        }
+        else if (i == sparse_matrix_1->IA[row + 1])
+        {
+            for (; j < sparse_matrix_2->IA[row + 1];)
+            {
+                non_zero++;
+                j++;
+            }
+        }
+    }
+
+    LOG_INFO("finish successfully");
+    return non_zero;
+}
+
+void fill_matrix_t_by_sparse_matrix_t(sparse_matrix_t *sparse_matrix, matrix_t *matrix)
+{
+    LOG_INFO("started");
+    for (int row = 0; row < sparse_matrix->rows; row++)
+    {
+        for (int i = sparse_matrix->IA[row]; i < sparse_matrix->IA[row + 1]; i++)
+        {
+            matrix->matrix[row][sparse_matrix->JA[i]] = sparse_matrix->A[i];
+        }
+    }
     LOG_INFO("finish successfully");
 }
 
@@ -456,7 +545,7 @@ int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *
     sparse_matrix_t sparse_matrix_res;
     int rows = sparse_matrix_1->rows;
     int columns = sparse_matrix_1->columns;
-    int non_zero = sparse_matrix_1->non_zero + sparse_matrix_2->non_zero;
+    int non_zero = count_non_zero_sparse(sparse_matrix_1, sparse_matrix_2);
 
     err = init_sparse_matrix_t(&sparse_matrix_res, rows, columns, non_zero);
     if (err != EXIT_SUCCESS)
@@ -475,9 +564,12 @@ int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *
         return err;
     }
 
-//    fill_matrix_t_by_sparse_matrix_t(&sparse_matrix_res, &matrix_res);
+    fill_matrix_t_by_sparse_matrix_t(&sparse_matrix_res, &matrix_res);
 
+    printf("Результат сложения разряженных матриц\n");
+    printf("Результирующая матрица в стандартном виде:\n");
     print_matrix_t(&matrix_res);
+    printf("Результирующая матрица в разряженном виде:\n");
     print_sparse_matrix_t(&sparse_matrix_res);
 
     free_sparse_matrix_t(&sparse_matrix_res);
@@ -487,85 +579,165 @@ int addition_sparse_matrix_t(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *
     return err;
 }
 
-//74 69 46 0 0 26 88
-//22 0 0 100 83 80 66
-//36 24 54 99 0 0 0
-//0 54 97 89 36 0 0
-//0 0 0 4 95 0 31
-//50 58 30 0 0 0 95
-//94 0 100 0 95 14 73
-//
-//A:  74 69 46 26 88 22 100 83 80 66 36 24 54 99 54 97 89 36 4 95 31 50 58 30 95 94 100 95 14 73
-//JA: 0 1 2 5 6 0 3 4 5 6 0 1 2 3 1 2 3 4 3 4 6 0 1 2 6 0 2 4 5 6
-//IA: 0 5 10 14 18 21 25 30
-//
-//0 0 0 0 16 43 19
-//67 85 69 0 39 96 2
-//95 0 12 24 26 0 0
-//73 0 0 53 90 48 0
-//12 69 0 51 36 0 0
-//0 99 0 91 0 0 0
-//14 86 39 27 62 54 73
-//
-//A:  16 43 19 67 85 69 39 96 2 95 12 24 26 73 53 90 48 12 69 51 36 99 91 14 86 39 27 62 54 73
-//JA: 4 5 6 0 1 2 4 5 6 0 2 3 4 0 3 4 5 0 1 3 4 1 3 0 1 2 3 4 5 6
-//IA: 0 3 9 13 17 21 23 30
-//
-//сумма в стандарте
-//74 69 46 0 16 69 107
-//89 85 69 100 122 176 68
-//131 24 66 123 26 0 0
-//73 54 97 142 126 48 0
-//12 69 0 55 131 0 31
-//50 157 30 91 0 0 95
-//108 86 139 27 157 68 146
-//
-//A:  74 69 46 16 69 107 89 85 69 100 122 176 68 131 24 66 123 26 73 54 97 142 126 48 12 69 55 131 31 50 157 30 91 95 108 86 139 27 157 68 146
-//JA: 0 1 2 4 5 6 0 1 2 3 4 5 6 0 1 2 3 4 0 1 2 3 4 5 0 1 3 4 6 0 1 2 3 6 0 1 2 3 4 5 6
-//IA: 0 6 13 18 24 29 34 41
-//
-//сумма в разряженной
-//
-//A:  74 69 46 16 69 107 89 85 69 100 122 176 68 131 24 66 123 26 73 73 54 97 142 126 48 12 12 69 55 131 31 50 157 30 91 95 108 86 139 27 157 68 146
-//JA: 0 1 2 4 5 6 0 1 2 3 4 5 6 0 1 2 3 4 0 0 1 2 3 4 5 0 0 1 3 4 6 0 1 2 3 6 0 1 2 3 4 5 6
-//IA: 0 6 13 19 26 31 36 43
-//
-//
-//
-//
-//
-//0 0 0 0 0
-//0 0 0 0 0
-//0 0 88 0 74
-//73 0 0 0 0
-//66 0 0 24 0
-//
-//A:  88 74 73 66 24
-//JA: 2 4 0 0 3
-//IA: 0 0 0 2 3 5
-//
-//0 0 4 100 0
-//0 0 0 0 0
-//0 0 0 0 0
-//0 36 30 0 0
-//0 0 0 0 58
-//
-//A:  4 100 36 30 58
-//JA: 2 3 1 2 4
-//IA: 0 2 2 2 4 5
-//
-//сумма в стандарте
-//
-//0 0 4 100 0
-//0 0 0 0 0
-//0 0 88 0 74
-//73 36 30 0 0
-//66 0 0 24 58
-//
-//A:  4 100 88 74 73 36 30 66 24 58
-//JA: 2 3 2 4 0 1 2 0 3 4
-//IA: 0 2 2 4 7 10
-//
-//A:  88 74 73 36 66 24 58
-//JA: 2 4 0 1 0 3 4
-//IA: 0 0 0 2 4 7
+unsigned long long microseconds_now(void)
+{
+    struct timeval val;
+
+    if (gettimeofday(&val, NULL))
+        return (unsigned long long) -1;
+
+    return val.tv_sec * 1000ULL * 1000ULL + val.tv_usec;
+}
+
+int compare_addition(sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *sparse_matrix_2, matrix_t *matrix_1, matrix_t *matrix_2)
+{
+    LOG_INFO("started");
+    int err = EXIT_SUCCESS;
+
+    if (sparse_matrix_1->A == NULL || sparse_matrix_2->A == NULL)
+    {
+        err = ERR_MATRIX_NOT_ALLOCATED;
+        LOG_ERROR(err);
+        return err;
+    }
+
+    if (sparse_matrix_1->rows != sparse_matrix_2->rows && sparse_matrix_1->columns != sparse_matrix_2->columns)
+    {
+        err = ERR_DIFF_MATRIX_SIZE;
+        LOG_ERROR(err);
+        return err;
+    }
+
+    if (matrix_1->matrix == NULL || matrix_2->matrix == NULL)
+    {
+        err = ERR_MATRIX_NOT_ALLOCATED;
+        LOG_ERROR(err);
+        return err;
+    }
+
+    if (matrix_1->rows != matrix_2->rows && matrix_1->columns != matrix_2->columns)
+    {
+        err = ERR_DIFF_MATRIX_SIZE;
+        LOG_ERROR(err);
+        return err;
+    }
+
+    sparse_matrix_t sparse_matrix_res;
+    matrix_t matrix_res;
+    int rows, columns, non_zero;
+
+    rows = sparse_matrix_1->rows;
+    columns = sparse_matrix_1->columns;
+    non_zero = count_non_zero_sparse(sparse_matrix_1, sparse_matrix_2);
+
+    err = init_sparse_matrix_t(&sparse_matrix_res, rows, columns, non_zero);
+    if (err != EXIT_SUCCESS)
+    {
+        LOG_ERROR(err);
+        return err;
+    }
+    unsigned long long beg_sparse_matrix, end_sparse_matrix, res_sparse_matrix;
+
+    beg_sparse_matrix = microseconds_now();
+    addition_sparse(sparse_matrix_1, sparse_matrix_2, &sparse_matrix_res);
+    end_sparse_matrix = microseconds_now();
+    res_sparse_matrix = end_sparse_matrix - beg_sparse_matrix;
+
+    err = init_matrix_t(&matrix_res, rows, columns, non_zero);
+    if (err != EXIT_SUCCESS)
+    {
+        LOG_ERROR(err);
+        return err;
+    }
+
+    fill_matrix_t_by_sparse_matrix_t(&sparse_matrix_res, &matrix_res);
+
+//    printf("Результат сложения разряженных матриц\n");
+//    printf("Результирующая матрица в стандартном виде:\n");
+//    print_matrix_t(&matrix_res);
+//    printf("Результирующая матрица в разряженном виде:\n");
+//    print_sparse_matrix_t(&sparse_matrix_res);
+
+    int mem_sparse_matrix_1 = 2 * (sizeof(int) * sparse_matrix_1->non_zero) + sizeof(int) * (sparse_matrix_1->rows + 1);
+    int mem_sparse_matrix_2 = 2 * (sizeof(int) * sparse_matrix_2->non_zero) + sizeof(int) * (sparse_matrix_2->rows + 1);
+    int mem_sparse_matrix_res = 2 * (sizeof(int) * sparse_matrix_res.non_zero) + sizeof(int) * (sparse_matrix_res.rows + 1);
+    int mem_sum_sparse = mem_sparse_matrix_1 + mem_sparse_matrix_2 + mem_sparse_matrix_res;
+    int sparse_rows = sparse_matrix_res.rows;
+    int sparse_columns = sparse_matrix_res.columns;
+    int sparse_matrix_1_non_zero = sparse_matrix_1->non_zero;
+    int sparse_matrix_2_non_zero = sparse_matrix_2->non_zero;
+    int sparse_matrix_res_non_zero = sparse_matrix_res.non_zero;
+
+    free_sparse_matrix_t(&sparse_matrix_res);
+    free_matrix_t(&matrix_res);
+
+    rows = matrix_1->rows;
+    columns = matrix_1->columns;
+    non_zero = count_non_zero(matrix_1, matrix_2);
+
+    err = init_matrix_t(&matrix_res, rows, columns, non_zero);
+    if (err != EXIT_SUCCESS)
+    {
+        LOG_ERROR(err);
+        return err;
+    }
+
+    unsigned long long beg_matrix, end_matrix, res_matrix;
+
+    beg_matrix = microseconds_now();
+    addition(matrix_1, matrix_2, &matrix_res);
+    end_matrix = microseconds_now();
+    res_matrix = end_matrix - beg_matrix;
+
+    err = init_sparse_matrix_t(&sparse_matrix_res, rows, columns, non_zero);
+    if (err != EXIT_SUCCESS)
+    {
+        LOG_ERROR(err);
+        return err;
+    }
+
+    fill_sparse_matrix_t_by_matrix_t(&sparse_matrix_res, &matrix_res);
+
+//    printf("Результат сложения неразряженных матриц\n");
+//    printf("Результирующая матрица в стандартном виде:\n");
+//    print_matrix_t(&matrix_res);
+//    printf("Результирующая матрица в разряженном виде:\n");
+//    print_sparse_matrix_t(&sparse_matrix_res);
+
+    int mem_matrix_1 = (sizeof(int) * matrix_1->rows * matrix_1->columns) + (matrix_1->rows * sizeof(int*));
+    int mem_matrix_2 = (sizeof(int) * matrix_2->rows * matrix_2->columns) + (matrix_2->rows * sizeof(int*));
+    int mem_matrix_res = (sizeof(int) * matrix_res.rows * matrix_res.columns) + (matrix_res.rows * sizeof(int*));;
+    int mem_sum = mem_matrix_1 + mem_matrix_2 + mem_matrix_res;
+     rows = matrix_res.rows;
+     columns = matrix_res.columns;
+    int matrix_1_non_zero = matrix_1->non_zero;
+    int matrix_2_non_zero = matrix_2->non_zero;
+    int matrix_res_non_zero = matrix_res.non_zero;
+
+    free_sparse_matrix_t(&sparse_matrix_res);
+    free_matrix_t(&matrix_res);
+
+    printf("Сравние времени\n\n");
+
+    printf("Время затраченное для сложения матриц в разряженном виде (микросекунды): %llu\n", res_sparse_matrix);
+    printf("Время затраченное для сложения матриц в неразряженном виде (микросекунды): %llu\n", res_matrix);
+
+    printf("Сравние памяти\n\n");
+
+    printf("Память при сложении в разряженном виде\n");
+    printf("Размеры матриц: %dx%d\n", sparse_rows, sparse_columns);
+    printf("Количество ненулевых элементов в 1 матрице: %d\n", sparse_matrix_1_non_zero);
+    printf("Количество ненулевых элементов в 2 матрице: %d\n", sparse_matrix_2_non_zero);
+    printf("Количество ненулевых элементов в результирующей матрице: %d\n", sparse_matrix_res_non_zero);
+    printf("Суммарный объем затраченной памяти (в байтах): %d\n\n", mem_sum_sparse);
+
+    printf("Память при сложении в неразряженном виде\n");
+    printf("Размеры матриц: %dx%d\n", rows, columns);
+    printf("Количество ненулевых элементов в 1 матрице: %d\n", matrix_1_non_zero);
+    printf("Количество ненулевых элементов в 2 матрице: %d\n", matrix_2_non_zero);
+    printf("Количество ненулевых элементов в результирующей матрице: %d\n", matrix_res_non_zero);
+    printf("Суммарный объем затраченной памяти (в байтах): %d\n", mem_sum);
+
+    LOG_INFO("finish successfully");
+    return err;
+}

@@ -18,6 +18,7 @@ DEPS := $(ALL_OBJS:.o=.d)
 TEST_OBJS := $(filter-out $(OUTDIR)/main.o, $(ALL_OBJS))
 
 .PHONY: release
+release: CFLAGS += -O0
 release: app.exe
 
 .PHONY: debug

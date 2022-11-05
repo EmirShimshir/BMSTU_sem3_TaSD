@@ -8,6 +8,43 @@
 #include "../inc/sparse_matrix.h"
 #include "../inc/actions.h"
 
+void print_error_message(int err)
+{
+    switch (err)
+    {
+        case ERR_MEM_ALLOC:
+            printf("Ошибка выделения памяти\n");
+            break;
+        case ERR_ACTION:
+            printf("Ошибка выбора пункта меню\n");
+            break;
+        case ERR_INPUT_ROWS:
+            printf("Ошибка ввода количества строк\n");
+            break;
+        case ERR_INPUT_COLUMNS:
+            printf("Ошибка ввода количества столбцов\n");
+            break;
+        case ERR_INPUT_NON_ZERO:
+            printf("Ошибка ввода количества ненулевых элементов\n");
+            break;
+        case ERR_INPUT_ELEM:
+            printf("Ошибка ввода значения элемента\n");
+            break;
+        case ERR_INPUT_PRINT_METHOD:
+            printf("Ошибка ввода метода вывода матрицы\n");
+            break;
+        case ERR_MATRIX_NOT_ALLOCATED:
+            printf("Ошибка, матрицы не проинициализированы\n");
+            break;
+        case ERR_DIFF_MATRIX_SIZE:
+            printf("Ошибка, матрицы разного размера\n");
+            break;
+        default:
+            printf("Ошибка взаимодействия с программой\n");
+            break;;
+    }
+}
+
 void print_menu(void)
 {
     LOG_INFO("started");
@@ -117,6 +154,13 @@ int do_action(int action, sparse_matrix_t *sparse_matrix_1, sparse_matrix_t *spa
             break;
         case 8:
             err = addition_sparse_matrix_t(sparse_matrix_1, sparse_matrix_2);
+            if (err != EXIT_SUCCESS)
+            {
+                LOG_ERROR(err);
+            }
+            break;
+        case 9:
+            err = compare_addition(sparse_matrix_1, sparse_matrix_2, matrix_1, matrix_2);
             if (err != EXIT_SUCCESS)
             {
                 LOG_ERROR(err);

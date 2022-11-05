@@ -15,7 +15,8 @@ int main(void)
     printf("Программа для сложения разряженных матриц\n"
            "Шимшир Эмирджан ИУ7-33Б В-24\n"
            "\n"
-           "МЕНЮ:\n");
+           "(Пользователь должен вводить только целые числа)\n"
+           "\n");
 
     sparse_matrix_t sparse_matrix_1 = { .A = NULL, .JA = NULL, .IA = NULL, .rows = 0, .columns = 0, .non_zero = 0};
     sparse_matrix_t sparse_matrix_2 = { .A = NULL, .JA = NULL, .IA = NULL, .rows = 0, .columns = 0, .non_zero = 0};
@@ -29,14 +30,14 @@ int main(void)
         err = choose_action(&action);
         if (err != EXIT_SUCCESS)
         {
-//            print_error_message(err);
+            print_error_message(err);
             continue;
         }
 
         err = do_action(action, &sparse_matrix_1, &sparse_matrix_2, &matrix_1, &matrix_2);
         if (err != EXIT_SUCCESS)
         {
-//            print_error_message(err);
+            print_error_message(err);
             continue;
         }
     }
