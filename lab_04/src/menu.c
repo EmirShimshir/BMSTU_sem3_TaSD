@@ -55,10 +55,10 @@ void print_error_message(int err)
             printf("Ошибка ввода количества слов\n");
             break;
         case ERR_FULL_FREE_AREAS:
-            printf("Ошибка, массив очищенных облостей полный\n");
+            printf("Ошибка, массив очищенных областей полный\n");
             break;
         case ERR_EMPTY_FREE_AREAS:
-            printf("Ошибка, массив очищенных облостей пустой\n");
+            printf("Ошибка, массив очищенных областей пустой\n");
             break;
         default:
             printf("Ошибка взаимодействия с программой\n");

@@ -105,7 +105,7 @@ int read_params(int *rows, int *columns, int *non_zero)
     LOG_INFO("started");
     int err = EXIT_SUCCESS;
 
-    printf("Введите количество строк матрицы: ");
+    printf("Введите количество строк матрицы (до 5000): ");
     // Ввод количества строк
     if (scanf("%d", rows) != 1)
     {
@@ -114,14 +114,14 @@ int read_params(int *rows, int *columns, int *non_zero)
         return err;
     }
 
-    if (*rows < 1)
+    if (*rows < 1 || *rows > MAX_MATRIX_SIZE)
     {
         int err = ERR_INPUT_ROWS;
         LOG_ERROR(err);
         return err;
     }
 
-    printf("Введите количество столбцов матрицы: ");
+    printf("Введите количество столбцов матрицы (до 5000): ");
     // Ввод количества столбцов
     if (scanf("%d", columns) != 1)
     {
@@ -130,7 +130,7 @@ int read_params(int *rows, int *columns, int *non_zero)
         return err;
     }
 
-    if (*columns < 1)
+    if (*columns < 1 || *columns > MAX_MATRIX_SIZE)
     {
         int err = ERR_INPUT_COLUMNS;
         LOG_ERROR(err);
