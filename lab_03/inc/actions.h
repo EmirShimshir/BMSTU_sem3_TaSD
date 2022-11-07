@@ -5,6 +5,8 @@
 #include "matrix.h"
 #include "sparse_matrix.h"
 
+#define MAX_MATRIX_SIZE 5000
+
 /*
 * Функция заполняет матрицы с заданными параметрами случайными числами.
 *
