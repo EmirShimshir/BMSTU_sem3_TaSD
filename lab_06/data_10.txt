@@ -1,0 +1,14 @@
+people
+family
+woman
+man
+girl
+boy
+child
+friend
+husband
+wife
+name
+head
+face
+hand
