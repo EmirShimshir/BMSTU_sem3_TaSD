@@ -5,6 +5,7 @@
 #include "../inc/graphviz.h"
 #include "../inc/read.h"
 #include "../inc/utils.h"
+#include "../inc/print_info.h"
 
 int main(void)
 {
@@ -12,6 +13,14 @@ int main(void)
     int rc;
     node_t *tree = NULL;
     char filename[MAX_STR_LEN + 1];
+
+    printf("Программа для работы с бинарным деревом\n"
+           "Шимшир Эмирджан ИУ7-33Б В-24\n"
+           "\n"
+           "(...)\n"
+           "\n");
+
+    print_menu();
 
     while (key != 0)
     {

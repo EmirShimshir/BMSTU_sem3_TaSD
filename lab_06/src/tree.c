@@ -6,12 +6,11 @@
 
 void free_tree(node_t *tree)
 {
-    if (tree)
-    {
-        free_tree(tree->left);
-        free_tree(tree->right);
-    }
+    if (tree == NULL)
+        return;
 
+    free_tree(tree->left);
+    free_tree(tree->right);
     free(tree);
 }
 

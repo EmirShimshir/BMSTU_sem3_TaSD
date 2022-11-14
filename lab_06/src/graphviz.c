@@ -3,21 +3,19 @@
 
 #include "../inc/graphviz.h"
 
-void tree_apply_pre(node_t *tree, ptr_action_t f, void *arg)
+void tree_apply_graphviz_pre(node_t *tree, FILE *f)
 {
     if (tree == NULL)
         return;
 
-    f(tree, arg);
-    tree_apply_pre(tree->left, f, arg);
-    tree_apply_pre(tree->right, f, arg);
+    node_to_dot(tree, f);
+    tree_apply_graphviz_pre(tree->left, f);
+    tree_apply_graphviz_pre(tree->right, f);
 }
 
 
-void node_to_dot(node_t *tree, void *param)
+void node_to_dot(node_t *tree, FILE *f)
 {
-    FILE *f = param;
-
     if (tree->left)
         fprintf(f, "%s -> %s [label=\"L\"]\n", tree->word, tree->left->word);
 
@@ -28,12 +26,15 @@ void node_to_dot(node_t *tree, void *param)
 
 void tree_export_to_dot(node_t *tree)
 {
-    FILE *f;
-    f = fopen("tree", "w");
+    FILE *f = fopen("tree", "w");
 
     fprintf(f, "digraph tree {\n");
 
-    tree_apply_pre(tree, node_to_dot, f);
+    printf("1");
+
+    tree_apply_graphviz_pre(tree, f);
+
+    printf("2");
 
     fprintf(f, "}\n");
 
