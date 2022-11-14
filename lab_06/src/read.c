@@ -8,8 +8,8 @@ int fill_tree_from_file(node_t **tree, char *filename)
     printf("Введите имя файла: ");
     scanf("%s", filename);
 
-    FILE *f = fopen(filename, "r");
-    if (!f)
+    FILE *f = NULL;
+    if ((f = fopen(filename, "r")) == NULL)
     {
         printf("Ошибка, неверено введено имя файла\n");
         return 2;

@@ -6,7 +6,8 @@ UNITDIR := ./unit_tests
 vpath %.c $(SRCDIR) $(UNITDIR)
 
 CC := gcc
-CFLAGS := -std=c99 -I $(INCDIR) -Werror -Wall -Wextra -Wfloat-equal -Wfloat-conversion -Wvla
+#CFLAGS := -std=c99 -I $(INCDIR) -Werror -Wall -Wextra -Wfloat-equal -Wfloat-conversion -Wvla
+CFLAGS := -std=c99 -I $(INCDIR)  -Wall -Wextra -Wfloat-equal -Wfloat-conversion -Wvla
 LDFLAGS := -lm -lcheck
 
 SRCS := $(wildcard $(SRCDIR)/*.c)

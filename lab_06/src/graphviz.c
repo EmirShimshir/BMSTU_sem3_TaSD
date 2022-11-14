@@ -30,11 +30,7 @@ void tree_export_to_dot(node_t *tree)
 
     fprintf(f, "digraph tree {\n");
 
-    printf("1");
-
     tree_apply_graphviz_pre(tree, f);
-
-    printf("2");
 
     fprintf(f, "}\n");
 
