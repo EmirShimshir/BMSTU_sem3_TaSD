@@ -11,7 +11,7 @@ int fill_tree_from_file(node_t **tree, char *filename)
     FILE *f = NULL;
     if ((f = fopen(filename, "r")) == NULL)
     {
-        printf("Ошибка, неверено введено имя файла\n");
+        printf("Ошибка, неверно введено имя файла\n");
         return 2;
     }
 

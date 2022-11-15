@@ -76,7 +76,11 @@ static void search_word(node_t **curr, char *word, node_t **parent)
     }
 }
 
-// Функция для удаления узла
+/*
+* Функция удаляет узел из дерева
+*
+* Принимает указатель на указатель на корень, слово и функцию для поиска
+*/
 static int delete_node(node_t **tree, char *word, search_t search)
 {
     // указатель для хранения родителя текущего узла
