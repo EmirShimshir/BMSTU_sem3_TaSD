@@ -4,8 +4,5 @@ man
 girl
 boy
 child
-husband
 wife
 name
-head
-hand
