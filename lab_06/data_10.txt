@@ -1,0 +1,8 @@
+people
+woman
+man
+girl
+boy
+child
+wife
+name

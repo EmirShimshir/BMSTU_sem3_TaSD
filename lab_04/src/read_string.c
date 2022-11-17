@@ -6,16 +6,7 @@
 
 void remove_new_line(char *target)
 {
-    target[strlen(target) - 1] = '\0';
-}
 
-bool is_any_space(char *target)
-{
-    for (size_t i = 0; i < strlen(target); i++)
-        if (target[i] == ' ')
-            return true;
-
-    return false;
 }
 
 int read_string(FILE *f, char *target, size_t max_target_len)
@@ -26,13 +17,10 @@ int read_string(FILE *f, char *target, size_t max_target_len)
     if ((strlen(target) == max_target_len + 1) && (target[max_target_len] != '\n'))
         return ERR_STRING_SIZE;
 
-    remove_new_line(target);
+    target[strlen(target) - 1] = '\0';
 
     if (strlen(target) == 0)
         return ERR_EMPTY_STRING;
-
-    if (is_any_space(target))
-        return ERR_SPACE;
 
     return EXIT_SUCCESS;
 }
