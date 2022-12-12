@@ -126,9 +126,8 @@ int main(int argc, char **argv)
                     if (code == OK)
                         printf("\nСлово %s найдено\n"
                             "Дерево двоичного поиска занимает - %ld байт\n"
-                            "Число сравнений до искомого слова - %d \n"
-                            "Время поиска - %llu\n",
-                            word, size * sizeof(tree_t), cmprs, time);
+                            "Число сравнений до искомого слова - %d \n",
+                            word, size * sizeof(tree_t), cmprs);
                     else
                         printf("\nЭлемент не найден\n");
 
@@ -141,9 +140,8 @@ int main(int argc, char **argv)
                     if (code == OK)
                         printf("\nСлово %s найдено\n"
                             "Сбалансированное дерево занимает - %ld байт\n"
-                            "Число сравнений до искомого слова - %d \n"
-                            "Время поиска - %llu\n",
-                            word, size * sizeof(tree_t), cmprs, time);
+                            "Число сравнений до искомого слова - %d \n",
+                            word, size * sizeof(tree_t), cmprs);
                     else
                         printf("\nЭлемент не найден\n");
 
@@ -157,9 +155,8 @@ int main(int argc, char **argv)
                     if (code == OK)
                         printf("\nСлово %s найдено\n"
                             "Хеш-таблица занимает - %ld байт\n"
-                            "Число сравнений до искомого слова - %d \n"
-                            "Время поиска - %llu\n",
-                            word, find_table_size(&table), cmprs, time);
+                            "Число сравнений до искомого слова - %d \n",
+                            word, find_table_size(&table), cmprs);
                     else if (code == RESTRUCT)
                     {
                         printf("\nЭлемент найден, но требуется реструктуризация\n");
@@ -182,9 +179,8 @@ int main(int argc, char **argv)
                     if (code == OK)
                         printf("\nСлово %s найдено\n"
                             "Файл занимает - %d байт\n"
-                            "Число сравнений до искомого слова - %d \n"
-                            "Время поиска - %llu\n",
-                            word, file_bytes(in_file), cmprs, time);
+                            "Число сравнений до искомого слова - %d \n",
+                            word, file_bytes(in_file), cmprs);
                     else
                         printf("\nЭлемент не найден\n");
 

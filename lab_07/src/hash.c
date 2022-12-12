@@ -12,13 +12,13 @@
 int get_hash(char *word, const int size)
 {
     int hash = 0;
-    int pow = 1;
+//    int pow = 1;
 
-    for (size_t i = 0; i < strlen(word); i++)
-    {
-        hash += (word[i] + 1) * pow;
-        pow *= P;
-    }
+//    for (size_t i = 0; i < strlen(word); i++)
+//    {
+//        hash += (word[i] + 1) * pow;
+//        pow *= P;
+//    }
 
     for (size_t i = 0; i < strlen(word); i++)
         hash += (int)word[i];
@@ -101,7 +101,7 @@ int create_hash_table(FILE *file, hash_table_t *result)
     return OK;
 }
 
-void print_list(const int index, hash_t *list)
+void print_list(hash_t *list)
 {
     for (hash_t *cur = list; cur; cur = cur->next)
         printf(" %5s -> ", cur->word);
