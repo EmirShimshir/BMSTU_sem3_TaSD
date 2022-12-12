@@ -4,6 +4,12 @@
 #include "../inc/tree_avl.h"
 
 static tree_t *add_balance(char *word, tree_t *tree, int *h);
+
+/*
+* Функция балансирует дерево
+*
+* Принимает указатель на корень дерева
+*/
 static tree_t *balance(tree_t *tree);
 static void set_height(tree_t *root);
 static int balance_factor(tree_t *root);

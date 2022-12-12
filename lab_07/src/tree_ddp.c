@@ -4,6 +4,11 @@
 #include "../inc/constants.h"
 #include "../inc/tree_ddp.h"
 
+/*
+* Функция добавляет новый узел в дерево
+*
+* Принимает указатель на корень, слово, указатель на глубину
+*/
 static tree_t *add_node(char *word, tree_t *tree, int *h);
 
 int create_tree(tree_t **root, FILE *f_in, int *count)
