@@ -5,9 +5,9 @@
 
 #include "tree.h"
 
-int create_tree(tree_t **root, FILE *f_in);
+int create_tree(tree_t **root, FILE *f_in, int *count);
 
-tree_t *create_node(char *word, int h)
+tree_t *create_node(char *word, int h);
 
 void free_tree(tree_t *tree);
 

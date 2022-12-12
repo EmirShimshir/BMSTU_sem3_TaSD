@@ -1,21 +1,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../inc/constants.h"
 #include "../inc/tree_ddp.h"
 
-static tree_t *add_node(char *word, tree_t *tree, int h);
+static tree_t *add_node(char *word, tree_t *tree, int *h);
 
-int create_tree(tree_t **root, FILE *f_in)
+int create_tree(tree_t **root, FILE *f_in, int *count)
 {
-    char str[MAGIC_SIZE];
+    *count = 0;
     int h = -1;
+    char str[WORD_SIZE];
 
-    while (fgets(str, MAGIC_SIZE, f_in) != NULL)
+    while (fgets(str, WORD_SIZE, f_in) != NULL)
     {
         if (str[strlen(str) - 1] == '\n')
             str[strlen(str) - 1] = '\0';
 
+        h = -1;
         *root = add_node(str, *root, &h);
+        (*count)++;
     }
 
     return OK;
@@ -68,13 +72,13 @@ void free_tree(tree_t *tree)
     }
 }
 
-static tree_t *add_node(char *word, tree_t *tree, int h)
+static tree_t *add_node(char *word, tree_t *tree, int *h)
 {
     (*h)++;
 
     if (tree == NULL)
     {
-        return create_node(word, h);
+        return create_node(word, *h);
     }
     else if (strcmp(word, tree->word) < 0)
     {
