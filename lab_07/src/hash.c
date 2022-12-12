@@ -21,13 +21,10 @@ int get_hash(char *word, const int size)
 int hash_table_init(hash_table_t *table, const int table_size)
 {
     table->count = table_size;
-    table->array = malloc(sizeof(hash_t *) * table_size);
+    table->array = calloc(sizeof(hash_t *), table_size);
 
     if (!table->array)
         return ALLOCATE_ERROR;
-
-    for (int i = 0; i < table_size; i++)
-        (table->array[i]) = NULL;
 
     return OK;
 }
@@ -108,7 +105,7 @@ void print_table(hash_table_t *table)
     if (!table->count)
         puts("Хеш-таблица пуста!");
 
-    for (int i = 1; i <= table->count; i++)
+    for (int i = 0; i < table->count; i++)
     {
         hash_t *tmp = table->array[i];
 

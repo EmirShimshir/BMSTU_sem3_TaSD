@@ -221,8 +221,6 @@ static void count_for_file(FILE *f, tree_t *tree, tree_t *balance, hash_table_t 
 {
     char **words = fill_words(f, n);
     int time = 0;
-    if (n == 1000)
-        time = 100;
     int cmp;
     unsigned long flen = file_len(f);
 
@@ -230,14 +228,10 @@ static void count_for_file(FILE *f, tree_t *tree, tree_t *balance, hash_table_t 
     printf("%20d  |", time);
 
     time = 0;
-    if (n == 1000)
-        time = 100;
     time = tree_count(balance, words, flen, &cmp);
     printf("%20d  |", time);
 
     time = 0;
-    if (n == 1000)
-        time = 100;
     time = hash_count_time(table, words, flen, &cmp);
     printf("%20d  |", time);
     rewind(f);
