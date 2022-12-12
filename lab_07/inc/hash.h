@@ -2,14 +2,9 @@
 #define HASH_H
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <inttypes.h>
 
-#include "tree.h"
 #include "constants.h"
-#include "errors.h"
-#include "time.h"
 
 typedef struct hash_t
 {

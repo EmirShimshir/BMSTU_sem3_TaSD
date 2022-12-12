@@ -2,22 +2,27 @@
 #include <stdlib.h>
 
 #include "../inc/constants.h"
-#include "../inc/input_output.h"
+#include "../inc/io.h"
 #include "../inc/tree_ddp.h"
 #include "../inc/tree_avl.h"
 #include "../inc/hash.h"
 #include "../inc/graphviz.h"
 #include "../inc/compare_structures.h"
+#include "../inc/time.h"
 
 int main(int argc, char **argv)
 {
+    if (argc != 2)
+    {
+        printf("Ошибка ввода аргументов (имя файла)\n");
+        return 1;
+    }
     tree_t *root = NULL;
     tree_t *balance = NULL;
     hash_table_t table;
     int size = 0;
     FILE *in_file;
 
-    print_conditions();
     input_rules();
     print_menu();
 

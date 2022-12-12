@@ -1,3 +1,11 @@
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+#include "../inc/tree_avl.h"
+#include "../inc/tree_ddp.h"
+#include "../inc/hash.h"
+#include "../inc/time.h"
 #include "../inc/compare_structures.h"
 
 static int file_len(FILE *f);
@@ -5,7 +13,7 @@ static char **fill_words(FILE *f, int n);
 static int tree_count(tree_t *tree, char **words, int n, int *cmp);
 static int hash_count_time(hash_table_t *hash_table,  char **words, int n, int *cmp);
 static void count_for_file(FILE *f, tree_t *tree, tree_t *balance, hash_table_t *table, int n);
-static int file_count(FILE *f, char **words, int n, int *cmprs);
+static int file_count(FILE *f, char **words, int n, int *cmp);
 
 int compare_structures(void)
 {

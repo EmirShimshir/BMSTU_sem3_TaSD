@@ -1,3 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <inttypes.h>
+
+#include "../inc/tree.h"
+#include "../inc/constants.h"
+#include "../inc/errors.h"
+#include "../inc/time.h"
 #include "../inc/hash.h"
 
 int get_hash(char *word, const int size)
