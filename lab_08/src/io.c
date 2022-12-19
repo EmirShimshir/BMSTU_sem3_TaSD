@@ -8,7 +8,7 @@
 void welcome_print()
 {
     printf("Выберите номер пункта меню:\n\n"
-           "1) Загрузить граф из файла\n"
+           "1) Загрузить граф из файла .data/graph.txt\n"
            "2) Ввести граф вручную\n"
            "3) Вывести граф в виде png картинки\n"
            "4) Вывести матрицу графа\n"
@@ -38,12 +38,12 @@ matrix_t *read_matrix(FILE *f)
         return NULL;
 
     matrix_t *matrix = create_matrix(count);
-    double num;
+    int num;
 
     for (int i = 0; i < count; ++i)
         for (int j = 0; j < count; ++j)
         {
-            if (fscanf(f, "%lf", &num) != 1 || num < 0)
+            if (fscanf(f, "%d", &num) != 1 || num < 0)
             {
                 printf("Ошибка, неверный элемент\n");
                 return NULL;
@@ -62,7 +62,7 @@ void print_matrix(FILE *f, matrix_t *graph)
 
     for (int i = 0; i < graph->count; ++i)
         for (int j = 0; j < graph->count; ++j)
-            fprintf(f, "%6.2lf%c", graph->data[i][j], j < graph->count - 1 ? ' ' : '\n');
+            fprintf(f, "%6d%c", graph->data[i][j], j < graph->count - 1 ? ' ' : '\n');
 }
 
 void to_dot(matrix_t *graph)
@@ -74,7 +74,7 @@ void to_dot(matrix_t *graph)
     for (int i = 0; i < graph->count; ++i)
         for (int j = 0; j < graph->count; ++j)
             if (graph->data[i][j] != 0.)
-                fprintf(f, "%d -> %d [label=\"%.1f\"];\n", i, j, graph->data[i][j]);
+                fprintf(f, "%d -> %d [label=\"%.1d\"];\n", i, j, graph->data[i][j]);
 
     fprintf(f, "}\n");
     fclose(f);

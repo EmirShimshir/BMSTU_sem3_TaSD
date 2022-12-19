@@ -21,13 +21,13 @@ matrix_t *create_matrix(int count)
     return matrix;
 }
 
-double **allocate_matrix(int count)
+int **allocate_matrix(int count)
 {
-    double **data = calloc(count, sizeof(double*));
+    int **data = calloc(count, sizeof(int*));
     if (data)
         for (int i = 0; i < count; ++i)
         {
-            data[i] = calloc(count, sizeof(double));
+            data[i] = calloc(count, sizeof(int));
             if (!data[i])
             {
                 free_matrix(data, count);
@@ -38,7 +38,7 @@ double **allocate_matrix(int count)
     return data;
 }
 
-void free_matrix(double **data, int count)
+void free_matrix(int **data, int count)
 {
     for (int i = 0; i < count; ++i)
         free(data[i]);

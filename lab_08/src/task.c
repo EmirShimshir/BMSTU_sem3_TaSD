@@ -14,32 +14,38 @@ int find_tops_with_Dijkstra(matrix_t *graph, int *count)
         return GRAPH_ERR;
 
     int top = 0;
-    double max_way = 0;
+    int max_way = 0;
     if (get_top_and_way(&top, &max_way, graph))
         return INPUT_ERR;
 
-    double distance[graph->count];
+    int distance[graph->count];
     Dijkstra(graph, distance, top);
 
-    printf("Фиолетовым будут выделены вершины,\n"
+    printf("Плюсом будут выделены вершины,\n"
            "расстояние до которых от заданной \n"
            "меньше, чем указанное\n\n");
 
+    to_dot(graph);
+
     FILE *f = fopen("data/task.gv", "w");
     fprintf(f, "digraph LAB_08 {\n");
+
+    for (int i = 0; i < graph->count; ++i)
+        for (int j = 0; j < graph->count; ++j)
+            if (graph->data[i][j] != 0.)
+                fprintf(f, "%d -> %d [label=\"%.1d\"];\n", i, j, graph->data[i][j]);
+
     for (int i = 0; i < graph->count; i++)
         if (distance[i] != INT_MAX && i != top)
         {
-            if (distance[i] < max_way)
+            if (distance[i] <= max_way)
             {
                 (*count)++;
-                fprintf(f, "%d -> %d [label=\"%.1f\"];\n", top, i, distance[i]);
-                printf("%d -> ", top);
-                printf("!%d !", i);
-                printf("= %lf \n", distance[i]);
+                fprintf(f, "%d -> %d [label=\"%d\" color=\"#228b22\" fontcolor=\"#228b22\"];\n", top, i, distance[i]);
+                printf("+: %d -> %d = %d \n", top, i, distance[i]);
             }
             else
-                printf("%d -> %d = %lf \n", top, i, distance[i]);
+                printf("-: %d -> %d = %d \n", top, i, distance[i]);
         }
     fprintf(f, "}\n");
     fclose(f);
@@ -50,9 +56,9 @@ int find_tops_with_Dijkstra(matrix_t *graph, int *count)
 
 }
 
-void Dijkstra(matrix_t *graph, double distance[graph->count], int top)
+void Dijkstra(matrix_t *graph, int distance[graph->count], int top)
 {
-    int visited[graph->count]; // посещенные вершины
+    int visited[graph->count];
     int buf = 0;
 
     for (int i = 0; i < graph->count; i++)
@@ -84,19 +90,19 @@ void Dijkstra(matrix_t *graph, double distance[graph->count], int top)
     }
 }
 
-int get_top_and_way(int *top, double *min_way, matrix_t *graph)
+int get_top_and_way(int *top, int *min_way, matrix_t *graph)
 {
     printf("\nВведите ключевую вершину (номер): ");
     if (scanf("%d", top) != 1 || *top < 0 || *top > graph->count)
     {
-        printf("Неверный номер\n");
+        printf("Ошибка, неверный номер\n");
         return INPUT_ERR;
     }
 
-    printf("\nВведите максимальную длину А: ");
-    if (scanf("%lf", min_way) != 0 && *min_way < 0)
+    printf("\nВведите максимальную длину пути: ");
+    if (scanf("%d", min_way) != 0 && *min_way < 0)
     {
-        printf("Число должно быть неотрицательным.\n");
+        printf("Ошибка, число должно быть неотрицательным\n");
         return GRAPH_ERR;
     }
 
@@ -119,42 +125,36 @@ void time_get()
                 {
                     printf("\nПроизводится сравнение времени работы и памяти, \n"
                            "затраченной на работу, алгоритма Дейкстры\n");
-                    printf("\n_______________________________\n");
                     printf("| Кол-во |  Время  |  Память  |\n");
-                    printf("|________|_________|__________|\n");
                     clock_t start, end;
 
                     matrix_t *g4 = read_matrix(f4);
-                    double arr4[g4->count];
+                    int arr4[g4->count];
                     start = clock();
                     Dijkstra(g4, arr4, 0);
                     end = clock();
                     printf("| %6d |  %5lu  |  %7zu |\n", 500, end - start, sizeof(double)*g4->count + sizeof(matrix_t*));
-                    printf("|________|_________|__________|\n");
 
                     matrix_t *g3 = read_matrix(f3);
-                    double arr3[g3->count];
+                    int arr3[g3->count];
                     start = clock();
                     Dijkstra(g3, arr3, 0);
                     end = clock();
                     printf("| %6d |  %5lu  |  %7zu |\n", 100, end - start, sizeof(double)*g3->count + sizeof(matrix_t*));
-                    printf("|________|_________|__________|\n");
 
                     matrix_t *g2 = read_matrix(f2);
-                    double arr2[g2->count];
+                    int arr2[g2->count];
                     start = clock();
                     Dijkstra(g2, arr2, 0);
                     end = clock();
                     printf("| %6d |  %5lu  |  %7zu |\n", 50, end - start, sizeof(double)*g2->count + sizeof(matrix_t*));
-                    printf("|________|_________|__________|\n");
 
                     matrix_t *g1 = read_matrix(f1);
-                    double arr1[g1->count];
+                    int arr1[g1->count];
                     start = clock();
                     Dijkstra(g1, arr1, 0);
                     end = clock();
                     printf("| %6d |  %5lu  |  %7zu |\n", 10, end - start, sizeof(double)*g1->count + sizeof(matrix_t*));
-                    printf("|________|_________|__________|\n");
 
                     fclose(f4);
                 }
