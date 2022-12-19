@@ -38,16 +38,17 @@ int allocate_matrix(matrix_t *matrix)
     return 0;
 }
 
-int matrix_fill(matrix_t *matrix, int count)
+int matrix_read_file(FILE *f, matrix_t *matrix)
 {
-    matrix->count = count;
+    if (fscanf(f, "%d", &matrix->count) != 1 || matrix->count < 1)
+        return 1;
 
     if (allocate_matrix(matrix))
         return 1;
 
     for (int i = 0; i < matrix->count; i++)
         for (int j = 0; j < matrix->count; j++)
-            if (scanf("%d", &matrix->data[i][j]) != 1)
+            if (fscanf(f, "%d", &matrix->data[i][j]) != 1)
             {
                 free_matrix(matrix);
                 return 1;
@@ -68,22 +69,21 @@ void matrix_print(matrix_t matrix)
 
 int main(void)
 {
-    int count;
-
     matrix_t graph_a;
     graph_a.data = NULL;
     matrix_t graph_b;
     graph_b.data = NULL;
+    FILE *f;
 
-
-    if (scanf("%d", &count) != 1 || count < 1)
+    f = fopen("./data/3_a.txt", "r");
+    if (matrix_read_file(f, &graph_a))
         return 1;
+    fclose(f);
 
-    if (matrix_fill(&graph_a, count))
+    f = fopen("./data/3_b.txt", "r");
+    if (matrix_read_file(f, &graph_b))
         return 1;
-
-    if (matrix_fill(&graph_b, count))
-        return 1;
+    fclose(f);
 
     matrix_print(graph_a);
     matrix_print(graph_b);
