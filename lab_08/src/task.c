@@ -125,36 +125,36 @@ void time_get()
                     printf("\nПроизводится сравнение времени работы и памяти, \n"
                            "затраченной на работу, алгоритма Дейкстры\n"
                            "Время в тиках, память в байтах:\n");
-                    printf("| Кол-во |  Время  |  Память  |\n");
+                    printf("| Количество |  Время  |  Память  |\n");
                     clock_t start, end;
-
-                    matrix_t *g4 = read_matrix(f4);
-                    int arr4[g4->count];
-                    start = clock();
-                    Dijkstra(g4, arr4, 0);
-                    end = clock();
-                    printf("| %6d |  %5lu  |  %7zu |\n", 500, end - start, sizeof(double)*g4->count + sizeof(matrix_t*));
-
-                    matrix_t *g3 = read_matrix(f3);
-                    int arr3[g3->count];
-                    start = clock();
-                    Dijkstra(g3, arr3, 0);
-                    end = clock();
-                    printf("| %6d |  %5lu  |  %7zu |\n", 100, end - start, sizeof(double)*g3->count + sizeof(matrix_t*));
-
-                    matrix_t *g2 = read_matrix(f2);
-                    int arr2[g2->count];
-                    start = clock();
-                    Dijkstra(g2, arr2, 0);
-                    end = clock();
-                    printf("| %6d |  %5lu  |  %7zu |\n", 50, end - start, sizeof(double)*g2->count + sizeof(matrix_t*));
 
                     matrix_t *g1 = read_matrix(f1);
                     int arr1[g1->count];
                     start = clock();
                     Dijkstra(g1, arr1, 0);
                     end = clock();
-                    printf("| %6d |  %5lu  |  %7zu |\n", 10, end - start, sizeof(double)*g1->count + sizeof(matrix_t*));
+                    printf("| %10d |  %5lu  |  %7zu |\n", 10, end - start, sizeof(double)*g1->count + sizeof(matrix_t*));
+
+                    matrix_t *g2 = read_matrix(f2);
+                    int arr2[g2->count];
+                    start = clock();
+                    Dijkstra(g2, arr2, 0);
+                    end = clock();
+                    printf("| %10d |  %5lu  |  %7zu |\n", 50, end - start, sizeof(double)*g2->count + sizeof(matrix_t*));
+
+                    matrix_t *g3 = read_matrix(f3);
+                    int arr3[g3->count];
+                    start = clock();
+                    Dijkstra(g3, arr3, 0);
+                    end = clock();
+                    printf("| %10d |  %5lu  |  %7zu |\n", 100, end - start, sizeof(double)*g3->count + sizeof(matrix_t*));
+
+                    matrix_t *g4 = read_matrix(f4);
+                    int arr4[g4->count];
+                    start = clock();
+                    Dijkstra(g4, arr4, 0);
+                    end = clock();
+                    printf("| %10d |  %5lu  |  %7zu |\n", 500, end - start, sizeof(double)*g4->count + sizeof(matrix_t*));
 
                     fclose(f4);
                 }
