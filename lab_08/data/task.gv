@@ -1,11 +1,12 @@
 digraph LAB_08 {
-0 -> 1 [label="1"];
-0 -> 3 [label="3"];
-1 -> 3 [label="2"];
-2 -> 4 [label="3"];
-3 -> 0 [label="9"];
-3 -> 2 [label="4"];
-3 -> 4 [label="10"];
-4 -> 1 [label="4"];
+0 -> 1 [label="2"];
+0 -> 2 [label="1"];
+1 -> 2 [label="3"];
+1 -> 4 [label="4"];
+2 -> 3 [label="1"];
+3 -> 1 [label="9"];
+4 -> 0 [label="3"];
 4 -> 3 [label="4"];
+2 -> 1 [label="10" color="#228b22" fontcolor="#228b22"];
+2 -> 3 [label="1" color="#228b22" fontcolor="#228b22"];
 }
