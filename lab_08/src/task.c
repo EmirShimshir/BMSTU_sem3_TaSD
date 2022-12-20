@@ -8,7 +8,7 @@
 #include "../inc/io.h"
 #include "../inc/errors.h"
 
-int find_tops_with_Dijkstra(matrix_t *graph, int *count)
+int find_dst_with_Dijkstra(matrix_t *graph)
 {
     if (check_graph_null(graph))
         return GRAPH_ERR;
@@ -40,7 +40,6 @@ int find_tops_with_Dijkstra(matrix_t *graph, int *count)
         {
             if (distance[i] <= max_way)
             {
-                (*count)++;
                 fprintf(f, "%d -> %d [label=\"%d\" color=\"#228b22\" fontcolor=\"#228b22\"];\n", top, i, distance[i]);
                 printf("+: %d -> %d = %d \n", top, i, distance[i]);
             }
@@ -124,7 +123,8 @@ void time_get()
                 if (f4)
                 {
                     printf("\nПроизводится сравнение времени работы и памяти, \n"
-                           "затраченной на работу, алгоритма Дейкстры\n");
+                           "затраченной на работу, алгоритма Дейкстры\n"
+                           "Время в тиках, память в байтах:\n");
                     printf("| Кол-во |  Время  |  Память  |\n");
                     clock_t start, end;
 

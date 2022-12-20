@@ -12,10 +12,10 @@ int main()
     matrix_t *graph = malloc(sizeof(matrix_t*));
     graph->data = NULL;
     graph->count = 0;
-    int command = -1, count_tops = 0;
+    int command = -1;
 
     printf("Программа для поиска вершин графа, к которым от\n"
-           "заданной вершины можно добраться по пути не\n"
+           "начальной вершины можно добраться по пути не\n"
            "длиннее А.\n"
 
            "Шимшир Эмирджан ИУ7-33Б\n"
@@ -67,7 +67,7 @@ int main()
                 if (check_empty_matrix(graph))
                     break;
 
-                find_tops_with_Dijkstra(graph, &count_tops);
+                find_dst_with_Dijkstra(graph);
                 break;
 
             case 6:

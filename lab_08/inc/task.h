@@ -3,7 +3,7 @@
 
 #include "graph.h"
 
-int find_tops_with_Dijkstra(matrix_t *graph, int *count);
+int find_dst_with_Dijkstra(matrix_t *graph);
 void Dijkstra(matrix_t *graph, int distance[graph->count], int top);
 int get_top_and_way(int *top, int *min_way, matrix_t *graph);
 void time_get();
